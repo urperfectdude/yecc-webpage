@@ -1,0 +1,65 @@
+---
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import logo from "../assets/logo.png";
+import { SITE_NAME, SOCIAL, EMAIL, PHONE, to } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Site path of the section this page belongs to, used to highlight the menu ("/courses"). */
+  path: string;
+  /** Extra structured data for this page (Course, BlogPosting, ...). */
+  schema?: Record<string, unknown>;
+  type?: "website" | "article";
+}
+const { title, description, path, schema, type = "website" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const home = new URL(to("/"), Astro.site).href;
+const image = new URL((await getImage({ src: logo, format: "png" })).src, Astro.site).href;
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  legalName: "YECC Learning Technologies Pvt Ltd",
+  url: home,
+  logo: image,
+  email: EMAIL,
+  telephone: PHONE,
+  sameAs: SOCIAL.map((s) => s.href),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.svg`} />
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/sitemap-index.xml`} />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#2b72d9" />
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...schema })} />}
+  </head>
+  <body>
+    <Header path={path} />
+    <main><slot /></main>
+    <Footer />
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>

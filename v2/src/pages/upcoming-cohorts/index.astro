@@ -1,0 +1,114 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import Btn from "../../components/Btn.astro";
+import TextLink from "../../components/TextLink.astro";
+import Head from "../../components/Head.astro";
+import Hero from "../../components/Hero.astro";
+import Section from "../../components/Section.astro";
+import Card from "../../components/Card.astro";
+import Col from "../../components/Col.astro";
+import Cta from "../../components/Cta.astro";
+import banner from "../../assets/slurp-slider1.webp";
+import artwork from "../../assets/slurp-oracle-20cloud-20erp-20fixed-20assets.webp";
+import kundan from "../../assets/slurp-kundan-chitare.webp";
+import medhavi from "../../assets/slurp-medhavi.webp";
+import shubham from "../../assets/slurp-shubham-sharma.webp";
+import abhay from "../../assets/abhay-kumar-singh.webp";
+
+const shared = ["Business-process context", "Guided practice"];
+const paths = [
+  { num: "01", title: "Oracle Finance", href: "/upcoming-cohorts/oracle-financials", text: "Build a practical foundation in Oracle Financials, core business processes, and functional consulting concepts.", bullets: ["Finance process foundations", "Oracle Financials orientation"] },
+  { num: "02", title: "Oracle Supply Chain", href: "/upcoming-cohorts/oracle-scm", text: "Build practical understanding of Oracle Supply Chain processes and develop the foundation for a functional consulting career.", bullets: ["Supply chain process foundations", "Oracle SCM orientation"] },
+  { num: "03", title: "Oracle Human Capital", href: "/upcoming-cohorts/oracle-hcm", text: "Build a practical foundation in human capital processes and develop your understanding of Oracle Human Capital for consulting.", bullets: ["Human Capital process foundations", "Oracle Human Capital orientation"] },
+];
+const quotes = [
+  { name: "Kundan Chitare", photo: kundan, quote: "I am delighted to share my successful completion of training with YECC, leading to a placement with a consulting company in Ahmedabad. The trainers’ friendly nature, profound subject knowledge, and personalized attention made the learning experience truly remarkable. YECC equipped me with new skills and knowledge, empowering me to thrive in this competitive world. I express my heartfelt gratitude for being a part of the YECC family!" },
+  { name: "Medhavi Chakraborty", photo: medhavi, quote: "Under the guidance and mentorship of the YECC team, I was able to make a complete career shift from teaching to the IT industry, and got a job in a consulting company as Oracle Finance Functional Consultant. YECC’s training was really valuable in giving an edge through the knowledge about Oracle Financials modules. Thanks to the YECC team for this. Kudos!" },
+  { name: "Shubham Sharma", photo: shubham, quote: "With my core industrial background, the training in Oracle Fusion Cloud SCM at YECC equipped me with the skills to understand business scenarios and implement solutions through system configuration in a practical environment. Our internal presentations and mock interviews also greatly contributed to the development of my expertise." },
+  { name: "Abhay Kumar Singh", photo: abhay, quote: "Coming from a non-IT, non-accounting background, I successfully reskilled myself in Oracle Fusion Finance through YourERPCoach.com. They provided excellent support in terms of real-world assignments, interview preparation, and multiple placement opportunities. I highly recommend YourERPCoach to those pursuing a career in Oracle Cloud ERP." },
+];
+---
+<Layout
+  path="/upcoming-cohorts"
+  title="Upcoming Oracle Consultant Cohorts | YECC"
+  description="Explore upcoming YECC individual consultant training cohorts for Oracle Finance, Supply Chain, and Human Capital Management."
+>
+  <Hero
+    eyebrow="Fresher Training Cohorts"
+    title="Build the Oracle consulting skills| you need to take your next step."
+    lead="Explore upcoming YECC cohorts across Finance, Supply Chain, and Human Capital Management. Build practical Oracle Cloud ERP capability through guided learning, business-process exercises, and cohort support."
+  >
+    <Btn href="#cohort-options">View Upcoming Cohorts</Btn>
+    <Btn href="/book-a-discussion" ghost>Contact YECC</Btn>
+  </Hero>
+
+  <Section id="cohort-options">
+    <Head
+      eyebrow="Cohort options"
+      title="Three functional paths.| One practical starting point."
+      lead="Choose the Oracle functional area you want to build your consulting foundation in. Each cohort combines foundational learning, business-process context, and guided practice."
+    />
+    <div class="grid c3">
+      {paths.map((p) => (
+        <Card icon="cap" num={p.num} title={p.title} text={p.text} bullets={[...p.bullets, ...shared]}>
+          <TextLink href={p.href}>View Program Details</TextLink>
+        </Card>
+      ))}
+    </div>
+    <p class="note">Dates, duration, fees, and enrolment availability are confirmed directly by YECC.</p>
+  </Section>
+
+  <Section id="fresher-cohort-delivery" class="bg-tint">
+    <div class="split">
+      <Head
+        eyebrow="Fresher training cohort"
+        title="A structured eight-week path| from preparation to presentation."
+        lead="Each week combines self-paced portal learning, assessed practice, and live trainer support, building toward mock CRPs and a final presentation."
+      />
+      <Image class="banner" src={banner} alt="A learner working on a laptop in a YECC digital training environment" />
+    </div>
+    <div class="cols c4 mt-[clamp(32px,5vw,64px)]">
+      <Col num="01" label="Weekly preparation" title="Watch the assigned learning videos" text="Trainees follow the weekly schedule and complete the required portal videos before each planned session. The content balances Oracle functional knowledge with consulting-skill development." />
+      <Col num="02" label="Knowledge checks" title="Complete quizzes and practice assignments" text="After each video, trainees complete an MCQ quiz and one or more descriptive practice assignments. The YECC team reviews submitted answers and monitors progress." />
+      <Col num="03" label="Instructor guidance" title="Join live online doubt-solving sessions" text="Once the weekly videos, quizzes, and assignments are complete, trainees attend expert-led online sessions to clarify concepts, discuss the exercises, and resolve doubts." />
+      <Col num="04" label="Cohort readiness" title="Prepare for mock CRPs and presentations" text="During week seven of the eight-week cohort, YECC helps trainees prepare for mock CRPs. In the final week, presentation topics are assigned across the batch for structured practice." />
+    </div>
+    <div class="split flip mt-[clamp(16px,3vw,40px)]">
+      <div>
+        <h3 class="serif text-[clamp(1.5rem,1.2rem+1.2vw,2rem)]">Choose the Oracle functional pathway you want to build.</h3>
+        <p class="lead mt-4">The cohort model supports focused Finance, Supply Chain, and Human Capital pathways with practical Oracle Cloud ERP learning.</p>
+        <div class="btns"><Btn href="#cohort-options">View Upcoming Cohorts</Btn></div>
+      </div>
+      <Image class="thumb" src={artwork} alt="Oracle Cloud Fixed Assets course artwork" width={880} />
+    </div>
+  </Section>
+
+  <Section id="learner-testimonials">
+    <Head
+      eyebrow="Learner testimonials"
+      title="What fresher training learners| say about YECC."
+      lead="Real experiences from learners who used YECC training to strengthen their Oracle knowledge and take their next career step."
+    />
+    <div class="scroller" data-scroller>
+      <div class="scroller-track" tabindex="0" aria-label="Learner testimonials, scroll sideways">
+        {quotes.map((q) => (
+          <figure class="quote">
+            <blockquote>“{q.quote}”</blockquote>
+            <footer><Image src={q.photo} alt="" width={96} height={96} />{q.name}</footer>
+          </figure>
+        ))}
+      </div>
+      <div class="scroller-nav">
+        <button type="button" class="prev" aria-label="Previous testimonials" disabled><Icon name="arrow" /></button>
+        <div class="dots"></div>
+        <button type="button" class="next" aria-label="Next testimonials"><Icon name="arrow" /></button>
+      </div>
+    </div>
+  </Section>
+
+  <Cta eyebrow="Need help choosing?" title="Tell us your background and the Oracle path you want to build toward.">
+    <Btn href="/book-a-discussion">Inquire About a Cohort</Btn>
+  </Cta>
+</Layout>

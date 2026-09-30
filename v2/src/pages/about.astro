@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Section from "../components/Section.astro";
+import Cta from "../components/Cta.astro";
+import paragraphs from "../data/about.json";
+---
+<Layout
+  path="/about"
+  title="About Your ERP Coach | YECC"
+  description="Learn about Your ERP Coach, its ERP training platform, career development pathways, and professional community."
+>
+  <Section>
+    <div class="prose">
+      <p class="eyebrow">Your ERP Coach</p>
+      <h1>About Us</h1>
+      {paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </Section>
+  <Cta eyebrow="Start a conversation" title="Tell us where user enablement fits into your Oracle delivery.">
+    <Btn href="/book-a-discussion">Contact the YECC Team</Btn>
+  </Cta>
+</Layout>

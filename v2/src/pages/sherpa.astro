@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Col from "../components/Col.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import Video from "../components/Video.astro";
+import { FORM } from "../lib/site";
+---
+<Layout
+  path="/sherpa"
+  title="SHERPA Authoring & Delivery Platform | YECC"
+  description="Create, govern, and deliver Oracle user manuals, process videos, and role-based learning through SHERPA."
+>
+  <Hero
+    eyebrow="The authoring and delivery layer"
+    title="Create once. Govern centrally.| Deliver learning by role."
+    lead="SHERPA is YECC's IP platform for creating user manuals and process videos, delivering role-based learning, and keeping enablement available beyond go-live."
+  >
+    <Btn href={FORM} arrow>Discuss a SHERPA pilot</Btn>
+    <Video slot="media" />
+  </Hero>
+
+  <Section id="delivery-approach">
+    <Head
+      eyebrow="Our SHERPA delivery approach"
+      title="Built around| the client’s Oracle solution."
+      lead="YECC works alongside the implementation partner to deliver user-training workshops and materials specific to the organisation’s processes, configuration, and users."
+    />
+    <div class="cols c3">
+      <Col num="01" title="We understand the solution" text="We analyse the organisation’s user manuals and Oracle Cloud test environment, then engage business users to understand processes, roles, and operational pain points." />
+      <Col num="02" title="We create and iterate the content" text="Using the client’s data, business processes, and Oracle Cloud test environment, YECC develops customised training videos, workshop materials, and supporting learning content." />
+      <Col num="03" title="We deliver through a dedicated portal" text="Personalised Oracle Cloud ERP training video bundles are deployed through a dedicated SHERPA learning portal configured for the organisation and its learners." />
+    </div>
+  </Section>
+
+  <Section id="benefits" class="bg-navy">
+    <Head
+      eyebrow="SHERPA benefits"
+      title="What SHERPA helps| teams achieve."
+      lead="SHERPA turns process-aligned authoring and role-based delivery into stronger user capability, smoother programs, measurable business value, and sustained readiness."
+    />
+    <div class="cols c4">
+      <Col icon="users" title="Capability" bullets={["Oracle Cloud process understanding", "Confident, role-based users", "Super users and internal experts"]} />
+      <Col icon="target" title="Program success" bullets={["Better design decisions", "Higher-quality SIT and UAT", "Fewer defects and less rework", "Faster decision-making"]} />
+      <Col icon="trend" title="Business value" bullets={["Faster user adoption", "Reduced support demand", "Improved productivity"]} />
+      <Col icon="shield" title="Strategic impact" bullets={["Lower transformation risk", "A sustainable operating model", "Release readiness"]} />
+    </div>
+    <p class="note">Powered by SHERPA as the authoring and delivery system.</p>
+  </Section>
+
+  <Section id="how-it-works" class="bg-tint">
+    <Head
+      title="Author → Deliver → Maintain"
+      lead="Turn configured process knowledge into practical learning assets, role-based delivery, and continuously updated guidance, all through one connected system."
+    />
+    <div class="cols c3">
+      <Col id="author" num="01" label="Author" title="Capture configured processes" />
+      <Col id="deliver" num="02" label="Deliver" title="Assign learning through SHERPA" />
+      <Col id="maintain" num="03" label="Maintain" title="Keep learning content current" />
+    </div>
+    <Head
+      eyebrow="Author"
+      title="Turn configured processes| into governed user knowledge."
+      lead="Capture the steps, decisions, roles, and customer-specific context behind each process so the enablement layer starts with the solution users will actually work with."
+    />
+    <div class="grid c4">
+      <Card id="user-manuals" icon="book" title="User manuals" text="Role-based guidance built around configured business processes." />
+      <Card id="process-videos" icon="video" title="Process videos" text="Visual walkthroughs users can revisit at the point of need." />
+      <Card id="training-delivery" icon="cap" title="Training delivery" text="Structured key-user and end-user training aligned with the approved content." />
+      <Card id="user-portal" icon="monitor" title="User portal" text="A role-based destination for assigned learning and reference materials." />
+    </div>
+  </Section>
+
+  <Section>
+    <Head
+      eyebrow="One connected enablement system"
+      title="SHERPA sits at the centre| of every YECC engagement."
+      lead="Whether the engagement begins during implementation or AMS, the same governed manuals, process videos, learning paths, and portal access move from creation to delivery and remain current after go-live."
+    >
+      <Chips items={["Manuals", "Process videos", "Learning paths", "Portal access"]} />
+    </Head>
+  </Section>
+
+  <Cta eyebrow="See SHERPA in action" title="See how SHERPA can power your user enablement.">
+    <Btn href={FORM} arrow>Discuss a SHERPA pilot</Btn>
+  </Cta>
+</Layout>

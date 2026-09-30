@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logo from "../assets/logo.png";
+import soc from "../assets/badge-aicpa-soc.svg?url";
+import hipaa from "../assets/badge-hipaa.svg?url";
+import ikeepsafe from "../assets/badge-ikeepsafe.svg?url";
+import { SOCIAL, TAGLINE, EMAIL, PHONE, to } from "../lib/site";
+const badges = [
+  { src: soc, alt: "AICPA SOC" },
+  { src: hipaa, alt: "HIPAA Compliant" },
+  { src: ikeepsafe, alt: "iKeepSafe" },
+];
+const solutions = [
+  ["Partnerships", "/partnerships"],
+  ["SHERPA", "/sherpa"],
+  ["Corporate Training", "/talent-pathways#corporate-fresher-training"],
+  ["ERPNext", "/erpnext-implementation"],
+];
+const company = [
+  ["About", "/about"],
+  ["Blogs", "/blogs"],
+  ["Contact", "/book-a-discussion"],
+];
+---
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="logo" href={to("/")} aria-label="YourERPCoach.com home"><Image src={logo} alt="YourERPCoach.Com" width={470} /></a>
+      <p class="about">{TAGLINE}</p>
+      <div class="badges">{badges.map((b) => <img src={b.src} alt={b.alt} width="58" height="58" loading="lazy" />)}</div>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul>{solutions.map(([label, href]) => <li><a href={to(href)}>{label}</a></li>)}</ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>{company.map(([label, href]) => <li><a href={to(href)}>{label}</a></li>)}</ul>
+    </div>
+    <div class="contact">
+      <h4>Contact us</h4>
+      <ul>
+        <li><a href={`tel:${PHONE.replace(/\s/g, "")}`}><Icon name="phone" />{PHONE}</a></li>
+        <li><a href={`mailto:${EMAIL}`}><Icon name="mail" />{EMAIL}</a></li>
+      </ul>
+      <h4 class="mt-6">Follow us</h4>
+      <div class="social">
+        {SOCIAL.map((s) => <a href={s.href} aria-label={s.label} target="_blank" rel="noopener"><Icon name={s.icon} /></a>)}
+      </div>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">© 2026 YECC Learning Technologies Pvt Ltd</div></div>
+</footer>

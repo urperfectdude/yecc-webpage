@@ -1,0 +1,78 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Btn from "../../components/Btn.astro";
+import Head from "../../components/Head.astro";
+import Hero from "../../components/Hero.astro";
+import Section from "../../components/Section.astro";
+import Card from "../../components/Card.astro";
+import Col from "../../components/Col.astro";
+import Checks from "../../components/Checks.astro";
+import Chips from "../../components/Chips.astro";
+import Cta from "../../components/Cta.astro";
+import cohorts from "../../data/cohorts.json";
+
+export function getStaticPaths() {
+  return cohorts.map((cohort) => ({ params: { slug: cohort.slug }, props: { cohort } }));
+}
+const c = Astro.props.cohort as (typeof cohorts)[number];
+const includedIcons = ["video", "file", "monitor", "users"];
+---
+<Layout path="/upcoming-cohorts" title={c.title} description={c.description}>
+  <Hero eyebrow="Fresher Training Cohorts" title={c.heading} lead={c.lead}>
+    <Btn href="#program-details">Explore Program Details</Btn>
+    <Btn href="/book-a-discussion" ghost>Contact the YECC Team</Btn>
+    <div class="cohort" slot="media">
+      <small>Upcoming cohort</small>
+      <p class="mt-3 mb-0"><span class="tag">{c.code}</span></p>
+      <strong>{c.month}</strong>
+      <Checks items={c.highlights} />
+      <Chips items={["Functional learning", "Career preparation"]} />
+    </div>
+  </Hero>
+
+  <Section id="program-details">
+    <Head eyebrow="Program details" title={c.details.heading} lead={c.details.lead} />
+    <dl class="facts c4">
+      {c.details.facts.map(([k, v]) => <div><dt>{k}</dt><dd class:list={{ small: v.length > 40 }}>{v}</dd></div>)}
+    </dl>
+  </Section>
+
+  <Section class="bg-tint">
+    <Head eyebrow="Curriculum" title={c.curriculum.heading} lead={c.curriculum.lead} />
+    <ul class="modules">
+      {c.curriculum.modules.map(([num, name]) => <li><span class="num">{num}</span><span>{name}</span></li>)}
+    </ul>
+    <div class="head mt-[clamp(40px,6vw,72px)]">
+      <h3 class="serif text-[1.6rem]">What is included</h3>
+      <p class="lead mt-3">{c.curriculum.includedLead}</p>
+    </div>
+    <div class="grid c4">
+      {c.curriculum.included.map(([title, text], i) => <Card icon={includedIcons[i]} title={title} text={text} />)}
+    </div>
+  </Section>
+
+  <Section>
+    <Head eyebrow="Delivery approach" title={c.delivery.heading} lead={c.delivery.lead} />
+    <div class="cols c3">
+      {c.delivery.steps.map((s) => <Col num={s.num} label={s.label} title={s.title} text={s.text} />)}
+    </div>
+  </Section>
+
+  <Section class="bg-navy">
+    <div class="split items-start">
+      <Head eyebrow="What this course supports" title={c.supports.heading} lead={c.supports.lead} />
+      <Checks items={c.supports.items} />
+    </div>
+  </Section>
+
+  <Section>
+    <Head eyebrow="Important details" title={c.important.heading} lead={c.important.lead} />
+    <dl class="facts">
+      {c.important.items.map(([k, v]) => <div><dt>{k}</dt><dd class="small">{v}</dd></div>)}
+    </dl>
+  </Section>
+
+  <Cta eyebrow="Interested in this cohort?" title={c.closing}>
+    <Btn href="/book-a-discussion">Contact the YECC Team</Btn>
+  </Cta>
+</Layout>

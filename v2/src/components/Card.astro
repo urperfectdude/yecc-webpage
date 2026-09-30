@@ -1,0 +1,22 @@
+---
+import Icon from "./Icon.astro";
+import Checks from "./Checks.astro";
+import { to } from "../lib/site";
+interface Props { title: string; text: string; bullets?: string[]; icon?: string; num?: string; id?: string; href?: string }
+const { title, text, bullets, icon, num, id, href } = Astro.props;
+// A card with an href is clickable as a whole and carries an arrow so it reads that way.
+const Tag = href ? "a" : "div";
+---
+<Tag class="card" id={id} href={href ? to(href) : undefined}>
+  {(icon || num || Astro.slots.has("top")) && (
+    <div class="card-top">
+      {icon && <span class="icon"><Icon name={icon} /></span>}
+      {num && <span class="num">{num}</span>}
+      <slot name="top" />
+    </div>
+  )}
+  <h3>{title}{href && <Icon name="go" />}</h3>
+  <p>{text}</p>
+  {bullets && <Checks items={bullets} />}
+  <slot />
+</Tag>

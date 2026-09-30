@@ -1,0 +1,21 @@
+---
+import Tone from "./Tone.astro";
+interface Props { eyebrow: string; title: string; lead?: string }
+const { eyebrow, title, lead } = Astro.props;
+// With something beside the text (video, card) the hero is a two-column split; otherwise it is centred.
+const split = Astro.slots.has("media");
+---
+<section class:list={["hero", { "hero-plain": !split }]}>
+  <div class="wrap">
+    <div class:list={["hero-grid", { split }]}>
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1><Tone text={title} /></h1>
+        {lead && <p class="lead">{lead}</p>}
+        <slot name="meta" />
+        {Astro.slots.has("default") && <div class="btns"><slot /></div>}
+      </div>
+      <slot name="media" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+{
+  "name": "yecc-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4174",
+    "build": "astro build",
+    "preview": "astro preview --port 4174"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.5"
+  }
+}

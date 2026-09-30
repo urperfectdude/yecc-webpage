@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Checks from "../components/Checks.astro";
+import { EMAIL } from "../lib/site";
+const options = [
+  "I need enablement support for an Oracle customer engagement",
+  "I want to explore SHERPA for documentation and learning",
+  "I am planning corporate fresher training for an SI team",
+  "I want to join an individual Oracle training cohort",
+  "I am not sure yet, please guide me",
+];
+---
+<Layout
+  path="/book-a-discussion"
+  title="Book an Oracle SI Partnership Discussion | YECC"
+  description="Discuss Oracle Fusion implementation enablement, AMS, DaaS, SHERPA, or corporate training with YECC."
+>
+  <Hero
+    eyebrow="Start a partnership conversation"
+    title="Tell us where user enablement fits| into your Oracle delivery."
+    lead="Share your engagement context and the areas where you need support. YECC can help with implementation enablement, AMS, Documentation as a Service, SHERPA, and consultant training."
+  >
+    <Btn href="#discussion-form">Complete the form</Btn>
+    <Btn href={`mailto:${EMAIL}`} ghost>Email {EMAIL}</Btn>
+  </Hero>
+
+  <Section id="discussion-form">
+    <div class="split items-start">
+      <div>
+        <Head
+          eyebrow="A focused first conversation"
+          title="Let's discuss| your Oracle enablement needs."
+          lead="Tell us what you're working on. We'll review your requirements and connect you with the right people for a focused discussion."
+        />
+        <Checks items={["Implementation, AMS, or DaaS requirements", "Target users, roles, and timelines", "Direct follow-up from the YECC team"]} />
+      </div>
+      <form class="form" data-mailto={EMAIL}>
+        <div class="row">
+          <label>Name<input type="text" name="name" placeholder="Enter your name" autocomplete="name" required /></label>
+          <label>Company<input type="text" name="company" placeholder="Enter your company name" autocomplete="organization" required /></label>
+        </div>
+        <div class="row">
+          <label>Work email<input type="email" name="email" placeholder="Enter your work email" autocomplete="email" required /></label>
+          <label>Role<input type="text" name="role" placeholder="Enter your role" autocomplete="organization-title" required /></label>
+        </div>
+        <label>How can YECC help?
+          <select name="interest" required>
+            <option value="">Choose the closest option</option>
+            {options.map((o) => <option>{o}</option>)}
+          </select>
+        </label>
+        <label>Tell us what you are working on
+          <textarea name="message" rows="6" required placeholder="Share the engagement, audience, timeline, or training path you have in mind..."></textarea>
+        </label>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </Section>
+</Layout>

@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import Btn from "./Btn.astro";
+import logo from "../assets/logo.png";
+import { NAV, LOGIN, to } from "../lib/site";
+const { path } = Astro.props as { path: string };
+const current = (href: string) => href.split("#")[0] === path;
+---
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href={to("/")} aria-label="YourERPCoach.com home">
+      <Image src={logo} alt="YourERPCoach.Com" width={434} loading="eager" />
+    </a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false">
+      <span class="bars"><Icon name="menu" /></span>
+      <span class="x"><Icon name="close" /></span>
+    </button>
+    <div class="header-panel">
+      <nav class="nav" aria-label="Main">
+        {NAV.map((item) =>
+          item.children ? (
+            <div class="nav-item">
+              <button type="button" aria-expanded="false" class:list={{ current: item.children.some((c) => current(c.href)) }}>
+                {item.label}<Icon name="chevron" />
+              </button>
+              <div class="dropdown">{item.children.map((c) => <a href={to(c.href)}>{c.label}</a>)}</div>
+            </div>
+          ) : (
+            <a href={to(item.href)} class:list={{ current: current(item.href) }} aria-current={current(item.href) ? "page" : undefined}>{item.label}</a>
+          )
+        )}
+      </nav>
+      <div class="header-cta">
+        <Btn href={LOGIN} ghost>Consultant Login</Btn>
+        <Btn href="/partnerships">Explore SI Partnership</Btn>
+      </div>
+    </div>
+  </div>
+</header>

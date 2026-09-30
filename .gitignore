@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+dist/
+.astro/
+
+# Local-only material, not part of the published sites: the raw scrape and its mirror server,
+# the design reference, and the earlier hand-built version of v2.
+/scrape/
+/serve.py
+/scribe.com-*/
+/legacy/
+/yecc_logo.png

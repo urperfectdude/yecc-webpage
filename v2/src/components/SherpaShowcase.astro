@@ -1,0 +1,89 @@
+---
+// Home page: the four SHERPA capabilities as auto-advancing tabs with a matching illustration.
+// The switching and the progress bar are driven by src/scripts/site.js.
+import Icon from "./Icon.astro";
+import Btn from "./Btn.astro";
+import Tone from "./Tone.astro";
+import { FORM } from "../lib/site";
+
+type Row = { n: string | number; text: string; tag: string; red?: boolean };
+const items: { title: string; text: string; window: string; video?: boolean; rows: Row[] }[] = [
+  {
+    title: "Author manuals",
+    text: "Create and govern role-based user manuals aligned with the customer’s configured processes.",
+    window: "SHERPA · User manual",
+    rows: [
+      { n: 1, text: "Configured process", tag: "Approved" },
+      { n: 2, text: "Role-based steps", tag: "Key user" },
+      { n: 3, text: "Decisions and context", tag: "Governed" },
+      { n: 4, text: "Published manual", tag: "Live", red: true },
+    ],
+  },
+  {
+    title: "Author process videos",
+    text: "Turn approved procedures into practical walkthroughs users can revisit at the point of need.",
+    window: "SHERPA · Process video",
+    video: true,
+    rows: [{ n: 1, text: "Approved procedure walkthrough", tag: "Video" }],
+  },
+  {
+    title: "Deliver by role",
+    text: "Assign manuals, videos, and learning paths to key users and end users through SHERPA.",
+    window: "SHERPA · Assign by role",
+    rows: [
+      { n: "K", text: "Key users", tag: "Manuals" },
+      { n: "K", text: "Key users", tag: "Learning path" },
+      { n: "E", text: "End users", tag: "Videos" },
+      { n: "E", text: "End users", tag: "Learning path" },
+    ],
+  },
+  {
+    title: "Maintain guidance",
+    text: "Keep documentation and training current as business processes and Oracle Cloud ERP releases evolve.",
+    window: "SHERPA · Maintain",
+    rows: [
+      { n: 1, text: "User manuals", tag: "Current" },
+      { n: 2, text: "Process videos", tag: "Updated", red: true },
+      { n: 3, text: "Training content", tag: "Current" },
+      { n: 4, text: "Oracle Cloud ERP release", tag: "Updated", red: true },
+    ],
+  },
+];
+---
+<div class="split" data-accordion>
+  <div>
+    <h2><Tone text="SHERPA connects content creation| with user adoption." /></h2>
+    <p class="lead mt-4">
+      SHERPA is more than a static LMS. It is YECC’s authoring and delivery platform for turning implementation knowledge
+      into governed user manuals, process videos, and role-based learning experiences.
+    </p>
+    <div class="accordion">
+      {items.map((item, i) => (
+        <div class:list={["acc-item", { on: i === 0 }]}>
+          <button type="button" aria-expanded={i === 0 ? "true" : "false"}><span>{item.title}</span><Icon name="chevron" /></button>
+          <p>{item.text}</p>
+        </div>
+      ))}
+    </div>
+    <div class="btns">
+      <Btn href={FORM} arrow>Discuss a SHERPA pilot</Btn>
+      <Btn href="/sherpa" ghost>Explore SHERPA</Btn>
+    </div>
+  </div>
+  <div>
+    <div class="stage">
+      {items.map((item, i) => (
+        <div class:list={["mock", { on: i === 0 }]}>
+          <div class="mock-bar"><i></i><i></i><i></i><span>{item.window}</span></div>
+          <div class="mock-body">
+            {item.video && <><div class="mock-video"></div><div class="mock-line"></div></>}
+            {item.rows.map((row) => (
+              <div class="mock-row"><b>{row.n}</b><span>{row.text}</span><em class={row.red ? "r" : undefined}>{row.tag}</em></div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="progress" aria-hidden="true">{items.map(() => <i></i>)}</div>
+  </div>
+</div>

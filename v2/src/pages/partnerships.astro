@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import { FORM } from "../lib/site";
+---
+<Layout
+  path="/partnerships"
+  title="Oracle SI Partnerships | YECC"
+  description="Oracle Fusion implementation, AMS, and Documentation as a Service partnerships for System Integrators, powered by SHERPA."
+>
+  <Hero
+    eyebrow="Oracle System Integrator Partnerships"
+    title="Extend your delivery team| with a dedicated user enablement workstream."
+    lead="YECC partners with Oracle System Integrators across Oracle Fusion implementations and AMS engagements, providing documentation, training, and SHERPA through a dedicated enablement workstream."
+  >
+    <Btn href={FORM}>Contact the YECC Team</Btn>
+  </Hero>
+
+  <Section>
+    <Head
+      eyebrow="Choose your engagement model"
+      title="Support adoption before go-live,| and long after it."
+      lead="Our role is designed around the SI delivery model. We take ownership of the documentation and learning layer while staying aligned with your project governance, milestones, and customer commitments."
+    />
+    <div class="grid c3">
+      <Card
+        id="implementation-enablement" icon="layers" num="01" title="EUT-as-a-Service"
+        text="A dedicated user enablement workstream for Oracle Fusion implementation programmes."
+        bullets={["Process-aligned user manuals", "Key-user and end-user training", "Process video creation", "SHERPA portal access"]}
+      />
+      <Card
+        id="ams-enablement" icon="refresh" num="02" title="Documentation-as-a-Service"
+        text="Ongoing user enablement that keeps knowledge, documentation, and training current as the solution evolves."
+        bullets={["Refresher training", "Updated user manuals", "Updated process videos", "Continued SHERPA access"]}
+      />
+      <Card
+        id="daas" icon="file" num="03" title="Resource Augmentation Service"
+        text="Documentation as a managed service, built around your customer’s configured processes."
+        bullets={["Consistent documentation standards", "Role-based content structure", "Governed updates", "Reusable digital delivery"]}
+      />
+    </div>
+  </Section>
+
+  <Section class="bg-navy">
+    <Head
+      title="Built to strengthen your SI relationship,| not sit outside it."
+      lead="YECC operates as an extension of your delivery team, providing a consistent and repeatable user enablement capability without creating a separate vendor experience for your customer."
+    >
+      <Chips items={["SI-aligned governance", "Flexible delivery capacity", "Customer-ready assets", "SHERPA-powered continuity"]} />
+    </Head>
+  </Section>
+
+  <Cta eyebrow="Ready to strengthen your delivery?" title="Add a dedicated enablement workstream to your Oracle delivery.">
+    <Btn href={FORM}>Contact the YECC Team</Btn>
+  </Cta>
+</Layout>

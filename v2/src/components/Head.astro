@@ -1,0 +1,11 @@
+---
+import Tone from "./Tone.astro";
+interface Props { eyebrow?: string; title: string; lead?: string; center?: boolean; class?: string }
+const { eyebrow, title, lead, center = false, class: cls } = Astro.props;
+---
+<div class:list={["head", { center }, cls]}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2><Tone text={title} /></h2>
+  {lead && <p class="lead">{lead}</p>}
+  <slot />
+</div>

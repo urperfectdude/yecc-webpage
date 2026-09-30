@@ -1,0 +1,13 @@
+---
+import Icon from "./Icon.astro";
+import Checks from "./Checks.astro";
+interface Props { title: string; text?: string; num?: string; icon?: string; label?: string; bullets?: string[]; id?: string }
+const { title, text, num, icon, label, bullets, id } = Astro.props;
+---
+<div id={id}>
+  {icon ? <span class="icon"><Icon name={icon} /></span> : <span class="num">{num}</span>}
+  {label && <span class="label">{label}</span>}
+  <h3>{title}</h3>
+  {text && <p>{text}</p>}
+  {bullets && <Checks items={bullets} />}
+</div>

@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Col from "../components/Col.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+---
+<Layout
+  path="/erpnext-implementation"
+  title="ERPNext Implementation Services | YECC"
+  description="Process discovery, solution design, ERPNext configuration, user enablement, documentation, and post-go-live support from YECC."
+>
+  <Hero
+    eyebrow="ERPNext implementation"
+    title="Shape ERPNext around the way| your business actually works."
+    lead="YECC supports ERPNext programmes from process discovery and solution design through configuration, user enablement, documentation, and post-go-live support."
+  >
+    <Btn href="/book-a-discussion">Discuss ERPNext</Btn>
+  </Hero>
+
+  <Section>
+    <Head
+      eyebrow="A practical implementation path"
+      title="Connect solution decisions| to confident day-to-day use."
+      lead="The workstream keeps process design, system configuration, documentation, and user readiness connected from the beginning rather than treating adoption as a final-stage handoff."
+    />
+    <div class="cols c4">
+      <Col id="discover" icon="search" title="Discover" text="Understand current processes, priorities, roles, and implementation constraints." bullets={["Process discovery", "Stakeholder alignment", "Requirements clarification", "Scope definition"]} />
+      <Col id="design-configure" icon="sliders" title="Design and configure" text="Translate agreed processes into a practical ERPNext solution design and configuration." bullets={["Solution design", "Configuration", "Process validation", "Review cycles"]} />
+      <Col id="enable-document" icon="book" title="Enable and document" text="Prepare users with practical guidance tied to the configured solution." bullets={["User enablement", "Process documentation", "Role-based guidance", "Training support"]} />
+      <Col id="sustain" icon="refresh" title="Support after go-live" text="Help teams stabilize usage and sustain the new operating model after launch." bullets={["Post-go-live support", "Issue clarification", "Refresher enablement", "Documentation updates"]} />
+    </div>
+  </Section>
+
+  <Section class="bg-navy">
+    <Head
+      title="Implementation is complete| when the system and its users can move together."
+      lead="YECC combines process-led solution work with the documentation and enablement needed to make ERPNext usable in daily operations."
+    >
+      <Chips items={["Discovery", "Configuration", "Documentation", "Support"]} />
+    </Head>
+  </Section>
+
+  <Cta eyebrow="Plan your ERPNext implementation" title="Connect process design, configuration, and user readiness in one practical workstream.">
+    <Btn href="/book-a-discussion">Discuss ERPNext</Btn>
+  </Cta>
+</Layout>

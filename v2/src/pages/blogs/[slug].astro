@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import Btn from "../../components/Btn.astro";
+import Section from "../../components/Section.astro";
+import Cta from "../../components/Cta.astro";
+import posts from "../../data/blogs.json";
+import { to } from "../../lib/site";
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const post = Astro.props.post as (typeof posts)[number];
+const schema = {
+  "@type": "BlogPosting",
+  headline: post.heading,
+  description: post.description,
+  image: post.image || undefined,
+  author: { "@type": "Organization", name: "YourERPCoach" },
+  publisher: { "@type": "Organization", name: "YourERPCoach" },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+<Layout path="/blogs" title={post.title} description={post.description} schema={schema} type="article">
+  <Section>
+    <article class="prose">
+      <a class="back" href={to("/blogs")}><Icon name="arrow" />All blogs</a>
+      <h1>{post.heading}</h1>
+      <Fragment set:html={post.html} />
+    </article>
+  </Section>
+  <Cta eyebrow="Start a conversation" title="Tell us where user enablement fits into your Oracle delivery.">
+    <Btn href="/book-a-discussion">Contact the YECC Team</Btn>
+  </Cta>
+</Layout>

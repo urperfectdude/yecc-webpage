@@ -1,0 +1,60 @@
+---
+import { pages, type SavedPage } from "../lib/saved";
+
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const page = Astro.props.page as SavedPage;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "YourERPCoach",
+  legalName: "YECC Learning Technologies Pvt Ltd",
+  url: new URL(base + "/", Astro.site).href,
+  email: "sales@yecc.tech",
+  telephone: "+91 99208 15714",
+};
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title}</title>
+    <meta name="description" content={page.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="YourERPCoach" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:url" content={canonical} />
+    {page.image && <meta property="og:image" content={page.image} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href={`${base}/site.css`} />
+    {/* Entrance animations start hidden and were revealed by a platform script; show the content straight away. */}
+    <style is:inline>[style*="opacity:0"]{opacity:1!important;transform:none!important}</style>
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+  </head>
+  <body class={page.bodyClass}>
+    <Fragment set:html={page.body} />
+    <script is:inline>
+      // Menus are <details> elements: close an open one when the visitor clicks elsewhere.
+      document.addEventListener("click", (e) => {
+        document.querySelectorAll("header details[open]").forEach((d) => d.contains(e.target) || d.removeAttribute("open"));
+      });
+      // There is no form backend, so submitting opens a pre-filled email to sales.
+      const form = document.querySelector("main form");
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const body = [...new FormData(form)].map(([k, v]) => `${k}: ${v}`).join("\n");
+          location.href = `mailto:sales@yecc.tech?subject=${encodeURIComponent("YECC discussion request")}&body=${encodeURIComponent(body)}`;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+# Builds both Astro sites and publishes them to GitHub Pages:
+#   <pages url>/v1/  the current site
+#   <pages url>/v2/  the new design
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            v1/package-lock.json
+            v2/package-lock.json
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Build v1
+        working-directory: v1
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/v1
+        run: npm ci && npm run build
+      - name: Build v2
+        working-directory: v2
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/v2
+        run: npm ci && npm run build
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp -r pages-root/. _site/
+          cp -r v1/dist _site/v1
+          cp -r v2/dist _site/v2
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,7 @@
+---
+import Icon from "./Icon.astro";
+import { to, isExternal } from "../lib/site";
+const { href } = Astro.props as { href: string };
+const external = isExternal(href) ? { target: "_blank", rel: "noopener" } : {};
+---
+<a class="link" href={to(href)} {...external}><slot /><Icon name="arrow" /></a>

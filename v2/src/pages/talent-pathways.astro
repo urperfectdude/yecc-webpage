@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import { FORM } from "../lib/site";
+---
+<Layout
+  path="/talent-pathways"
+  title="Consulting Training | Oracle ERP Training"
+  description="Corporate Oracle ERP fresher training for SI hires and individual fresher training cohorts."
+>
+  <Hero
+    eyebrow="Oracle talent development"
+    title="Oracle Cloud ERP training| for System Integrators and aspiring consultants."
+    lead="YECC provides practical Oracle Cloud ERP training for System Integrators developing graduate talent and for individuals building the skills needed to start or advance their consulting careers."
+  >
+    <Btn href={FORM}>Enquire About a Corporate Training Batch</Btn>
+    <Btn href="/upcoming-cohorts" ghost>View Upcoming Cohorts</Btn>
+  </Hero>
+
+  <Section id="training-pathways">
+    <Head eyebrow="Audience-specific pathways" title="Choose the training path| designed for you." />
+    <div class="grid c2">
+      <Card
+        id="corporate-fresher-training" icon="users" num="01" title="Corporate Fresher Training for System Integrators"
+        text="Turn newly hired graduates into project-ready junior consultants through a structured batch built around the SI’s talent plan, delivery calendar, and selected Oracle Cloud ERP track."
+        bullets={["Oracle foundations before functional depth", "Business-process context, not screen navigation alone", "Guided exercises that mirror consulting work", "Batch coordination aligned with SI timelines"]}
+      >
+        <Btn href={FORM}>Enquire About a Corporate Batch</Btn>
+      </Card>
+      <Card
+        id="fresher-training-cohorts" icon="cap" num="02" title="Fresher Training Cohorts"
+        text="Build the foundations, process understanding, and guided functional practice needed to take a credible first step toward an Oracle Cloud ERP consulting career."
+        bullets={["Finance, Supply Chain, or Human Capital pathways", "ERP consulting orientation and terminology", "Process-led exercises with instructor guidance", "Cohort learning and continued support"]}
+      >
+        <Btn href="/upcoming-cohorts" ghost>View Upcoming Cohorts</Btn>
+      </Card>
+    </div>
+  </Section>
+
+  <Section class="bg-tint">
+    <Head eyebrow="Corporate training testimonials" title="What corporate training participants| say about YECC." />
+    <div class="grid c3">
+      {[1, 2, 3].map(() => <figure class="quote empty"><blockquote>Written testimonial coming soon.</blockquote></figure>)}
+    </div>
+  </Section>
+
+  <Section class="bg-navy">
+    <Head
+      eyebrow="Audience-specific pathways"
+      title="Choose the training path| designed for you."
+      lead="Both pathways combine Oracle Cloud ERP foundations, business-process context, and guided practice while keeping the audience, outcomes, and next action clear."
+    >
+      <Chips items={["Oracle foundations", "Business-process context", "Practical exercises", "Cohort support"]} />
+    </Head>
+  </Section>
+
+  <Cta eyebrow="Choose your next step" title="Prepare a new SI batch or explore the next individual cohort.">
+    <Btn href="#training-pathways">Explore training options</Btn>
+  </Cta>
+</Layout>

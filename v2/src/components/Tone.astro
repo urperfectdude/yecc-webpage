@@ -1,0 +1,6 @@
+---
+// Two-tone heading text: "Strong part.| Softer part." The part after the bar is shown in the softer colour.
+const { text } = Astro.props as { text: string };
+const [strong, soft] = text.split("|");
+---
+{strong}{soft && <span class="tone">{soft}</span>}

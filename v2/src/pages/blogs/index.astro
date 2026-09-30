@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import Hero from "../../components/Hero.astro";
+import Section from "../../components/Section.astro";
+import posts from "../../data/blogs.json";
+import { to } from "../../lib/site";
+---
+<Layout
+  path="/blogs"
+  title="Oracle Cloud ERP Blogs & Practical Guides | YECC"
+  description="Explore YECC articles covering ERP foundations and step-by-step Oracle Cloud guidance for consultants and System Integrator delivery teams."
+>
+  <Hero
+    eyebrow="Blogs"
+    title="Oracle Cloud ERP insights| and practical guides."
+    lead="Explore YECC articles covering ERP foundations and step-by-step Oracle Cloud guidance for consultants and delivery teams."
+  />
+  <Section>
+    <div class="grid c3">
+      {posts.map((post) => (
+        <a class="post" href={to(`/blogs/${post.slug}`)}>
+          {post.image && <img src={post.image} alt="" loading="lazy" />}
+          <div>
+            <h2>{post.cardTitle}</h2>
+            <p>{post.excerpt}</p>
+            <span class="link">Read more<Icon name="arrow" /></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </Section>
+</Layout>

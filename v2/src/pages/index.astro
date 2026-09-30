@@ -1,0 +1,123 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import Btn from "../components/Btn.astro";
+import TextLink from "../components/TextLink.astro";
+import Head from "../components/Head.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Cta from "../components/Cta.astro";
+import Voices from "../components/Voices.astro";
+import SherpaShowcase from "../components/SherpaShowcase.astro";
+import cohorts from "../data/cohorts.json";
+import { FORM, to } from "../lib/site";
+import fusion from "../assets/fusion-practices-clean.png";
+import version1 from "../assets/version1-logo-dark.svg?url";
+import emicon from "../assets/emicon-logo.png";
+import conneqtion from "../assets/conneqtion-logo.png";
+import mastek from "../assets/mastek-logo.png";
+import ibm from "../assets/ibm-logo.svg?url";
+
+const logos = [
+  { src: fusion.src, name: "Fusion Practices" },
+  { src: version1, name: "Version 1" },
+  { src: emicon.src, name: "Emicon" },
+  { src: conneqtion.src, name: "Conneqtion" },
+  { src: mastek.src, name: "Mastek" },
+  { src: ibm, name: "IBM" },
+];
+const tiles = [
+  { icon: "layers", label: "EUT-as-a-Service", href: "/partnerships#implementation-enablement" },
+  { icon: "file", label: "Documentation-as-a-Service", href: "/partnerships#ams-enablement" },
+  { icon: "users", label: "Resource Augmentation", href: "/partnerships#daas" },
+  { icon: "monitor", label: "SHERPA platform", href: "/sherpa" },
+  { icon: "cap", label: "Consulting training", href: "/talent-pathways" },
+  { icon: "sliders", label: "ERPNext implementation", href: "/erpnext-implementation" },
+];
+const cohortNames: Record<string, string> = {
+  "oracle-hcm": "Oracle Cloud HCM",
+  "oracle-financials": "Oracle Cloud Financials",
+  "oracle-scm": "Oracle Cloud Supply Chain",
+};
+---
+<Layout
+  path="/"
+  title="Oracle SI Enablement & Training Partnerships | YourERPCoach"
+  description="YECC partners with Oracle System Integrators to create user manuals and process videos, deliver key-user and end-user training, and provision the SHERPA learning portal."
+>
+  <section class="hero hero-home">
+    <div class="wrap">
+      <h1>Strengthen your Oracle delivery<span class="tone"> with <span class="nw">end-to-end</span> user enablement.</span></h1>
+      <p class="lead">User documentation, process videos, and training for Oracle System Integrators, powered by SHERPA.</p>
+      <p class="serif tiles-title">How can YECC help?</p>
+      <div class="tiles">
+        {tiles.map((t) => <a href={to(t.href)}><Icon name={t.icon} /><span>{t.label}</span></a>)}
+      </div>
+      <div class="btns"><Btn href="/partnerships">Explore SI Partnership</Btn></div>
+    </div>
+  </section>
+
+  <section class="band" id="approach">
+    <div class="wrap">
+      <p>Experience across enterprise transformation environments</p>
+      <div class="marquee">
+        {/* The track is doubled so the -50% slide loops seamlessly; the copy is hidden from assistive tech. */}
+        <div class="marquee-track">
+          {logos.map((l) => <img src={l.src} alt={`${l.name} logo`} loading="lazy" />)}
+          {logos.map((l) => <img src={l.src} alt="" aria-hidden="true" loading="lazy" />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section id="partnership">
+    <Head
+      eyebrow="Oracle System Integrator Partnerships"
+      title="Extend your delivery team| with a dedicated user enablement workstream."
+      lead="YECC works alongside your SI team to turn configured processes into practical documentation, training, and sustained access through SHERPA."
+    />
+    <div class="grid c2">
+      <Card
+        title="SHERPA for Implementation" icon="layers" num="01" href="/partnerships#implementation-enablement"
+        text="Bring YECC into your implementation workstream to manage documentation and user enablement from process design through go-live."
+        bullets={["Capture configured processes as project decisions are approved", "Prepare key users before the wider end-user rollout", "Deliver role-based manuals, process videos, and training", "Launch SHERPA as the user knowledge hub for go-live"]}
+      />
+      <Card
+        title="SHERPA for AMS" icon="refresh" num="02" href="/partnerships#ams-enablement"
+        text="Extend your AMS services with ongoing user enablement, refresher training, and updated documentation as processes and Oracle Cloud ERP releases evolve."
+        bullets={["Refresh business users as processes and releases change", "Update manuals and process videos under governed standards", "Deliver targeted retraining for affected roles", "Keep current guidance available through SHERPA"]}
+      />
+    </div>
+  </Section>
+
+  <Section id="sherpa" class="bg-navy"><SherpaShowcase /></Section>
+
+  <Section id="voices">
+    <Head title="What fresher training learners| say about YECC." />
+    <Voices />
+    <p class="mt-8 mb-0"><TextLink href="/upcoming-cohorts#learner-testimonials">Read the full learner stories</TextLink></p>
+  </Section>
+
+  <Section id="upcoming" class="rule">
+    <Head
+      eyebrow="Upcoming cohorts"
+      title="Three functional paths.| One practical starting point."
+      lead="Choose the Oracle functional area you want to build your consulting foundation in."
+    />
+    <div class="grid c3">
+      {cohorts.map((c) => (
+        <a class="cohort-card" href={to(`/upcoming-cohorts/${c.slug}`)}>
+          <span class="tag">{c.code}</span>
+          <strong class="serif">{c.month}</strong>
+          <h3>{cohortNames[c.slug]}</h3>
+          <p>{c.highlights[0]} · {c.details.facts[1][1]}</p>
+          <span class="link">View Program Details<Icon name="arrow" /></span>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <Cta eyebrow="Ready to strengthen your delivery?" title="Add a dedicated enablement workstream to your Oracle delivery.">
+    <Btn href={FORM}>Contact the YECC Team</Btn>
+  </Cta>
+</Layout>

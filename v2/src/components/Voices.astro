@@ -1,0 +1,31 @@
+---
+// Staggered quote cards standing on a baseline of learner names (home page).
+import { Image } from "astro:assets";
+import kundan from "../assets/slurp-kundan-chitare.webp";
+import medhavi from "../assets/slurp-medhavi.webp";
+import shubham from "../assets/slurp-shubham-sharma.webp";
+import abhay from "../assets/abhay-kumar-singh.webp";
+// Short excerpts, in the learners' own words, from the full testimonials on the cohorts page.
+// "stem" is how far each card is lifted above the baseline on wide screens.
+const voices = [
+  { title: "Truly remarkable", quote: "The trainers’ friendly nature, profound subject knowledge, and personalized attention made the learning experience truly remarkable.", name: "Kundan Chitare", photo: kundan, stem: 36 },
+  { title: "A complete career shift", quote: "YECC’s training was really valuable in giving an edge through the knowledge about Oracle Financials modules.", name: "Medhavi Chakraborty", photo: medhavi, stem: 150 },
+  { title: "Practical from day one", quote: "Our internal presentations and mock interviews also greatly contributed to the development of my expertise.", name: "Shubham Sharma", photo: shubham, stem: 100 },
+  { title: "Highly recommend", quote: "They provided excellent support in terms of real-world assignments, interview preparation, and multiple placement opportunities.", name: "Abhay Kumar Singh", photo: abhay, stem: 20 },
+];
+---
+<div class="voices">
+  {voices.map((v) => (
+    <figure class="voice" style={`--stem:${v.stem}px`}>
+      <blockquote>
+        <strong class="serif">{v.title}</strong>
+        <p>{v.quote}</p>
+      </blockquote>
+      <figcaption>
+        <Image src={v.photo} alt="" width={72} height={72} />
+        <span>{v.name}</span>
+        <i></i>
+      </figcaption>
+    </figure>
+  ))}
+</div>
