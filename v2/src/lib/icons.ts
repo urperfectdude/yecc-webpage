@@ -25,4 +25,5 @@ export const ICONS: Record<string, string> = {
   "instagram": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4.5\"/><circle cx=\"12\" cy=\"12\" r=\"3.5\"/><path d=\"M16.5 7.500h.01\"/>",
   "youtube": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"3.5\"/><path d=\"M10.5 9.500l4 2.5-4 2.500z\"/>",
   "facebook": "<path d=\"M14 8h2.500V4.500H14a3.5 3.5 0 0 0-3.5 3.500v2.500H8V14h2.500v6H14v-6h2.500l.500-3.500h-3V8z\"/>",
+  "clock": "<path d=\"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2\"/>",
 };

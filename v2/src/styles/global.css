@@ -24,6 +24,7 @@
 }
 
 :root {
+  interpolate-size: allow-keywords;
   --wrap: 1200px;
   --gutter: clamp(20px, 5vw, 48px);
   --radius: 18px;
@@ -403,40 +404,95 @@
   .modules li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.9rem; align-items: baseline; padding: 0.9rem 1.1rem; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-white); font-weight: 500; color: var(--color-ink); }
   @media (min-width: 700px) { .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  /* Course detail */
-  .buy { display: grid; gap: 1.1rem; padding: clamp(22px, 3vw, 32px); border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-white); box-shadow: 0 30px 60px -40px rgba(13, 35, 68, 0.45); }
-  .buy-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; margin: 0; }
-  .buy-price strong { font-size: clamp(2.2rem, 1.8rem + 1.6vw, 3rem); font-weight: 500; line-height: 1; color: var(--color-ink); }
-  .buy-price s { color: var(--color-soft); }
-  .buy-price em { font-style: normal; font-size: 0.82rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--color-red); color: var(--color-white); }
-  .buy h3 { margin-top: 0.4rem; padding-top: 1.3rem; border-top: 1px solid var(--color-line); font-size: 1rem; }
-  .hero .chips { margin-top: 1.3rem; }
-  .ideal { display: grid; gap: 12px; }
-  .ideal li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 0.8rem; padding: 20px 22px; border-radius: 14px; background: var(--color-white); color: var(--color-ink); line-height: 1.5; }
-  .ideal svg { width: 20px; height: 20px; margin-top: 2px; color: var(--color-red); }
-  @media (min-width: 800px) { .ideal { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .module { border: 1px solid var(--color-line); border-radius: 14px; background: var(--color-white); }
-  .module + .module { margin-top: 12px; }
-  .module summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 18px 22px; cursor: pointer; list-style: none; }
+  /* Course detail: one reading column with a sticky purchase card beside it */
+  .course { display: grid; gap: 40px; padding-block: clamp(40px, 6vw, 80px) clamp(64px, 8vw, 112px); }
+  .course > * { min-width: 0; }
+  @media (min-width: 1040px) {
+    .course { grid-template-columns: minmax(0, 1fr) 340px; column-gap: clamp(48px, 6vw, 88px); align-items: start; }
+    .course-aside { grid-column: 2; grid-row: 1 / span 2; position: sticky; top: 96px; }
+  }
+  .course-intro .eyebrow { margin-bottom: 0.9rem; }
+  .course-intro h1 { font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); line-height: 1.12; text-wrap: balance; }
+  .course-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin: 1.2rem 0 0; font-size: 0.95rem; color: var(--color-body); }
+  .course-meta li { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .course-meta svg { width: 17px; height: 17px; color: var(--color-soft); }
+  .course-part { padding-top: clamp(36px, 4vw, 48px); margin-top: clamp(36px, 4vw, 48px); border-top: 1px solid var(--color-line); }
+  .course-part:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
+  .course-part h2 { font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.7rem); margin-bottom: 1.2rem; }
+  .course-part > p, .more p { margin: 0; line-height: 1.75; }
+  .course-part .checks li { font-size: 1rem; }
+  .muted { color: var(--color-soft); font-size: 0.92rem; }
+
+  /* Long description: clipped to a few lines until "Read more" */
+  .more { position: relative; }
+  .more p { max-height: 7em; overflow: hidden; transition: max-height 0.4s ease; }
+  .more.open p { max-height: 60em; }
+  .more:not(.open) p { -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
+  .more button, .text-btn { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.7rem; padding: 0; border: 0; background: none; font-size: 0.92rem; font-weight: 600; color: var(--color-blue); cursor: pointer; }
+  .more button svg, .text-btn svg { width: 16px; height: 16px; transition: transform 0.25s; }
+  .more.open button svg { transform: rotate(180deg); }
+
+  /* Purchase card */
+  .buy { overflow: hidden; border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-white); transition: box-shadow 0.3s, transform 0.3s; }
+  .buy:hover { box-shadow: 0 24px 48px -32px rgba(13, 35, 68, 0.4); }
+  .buy-art { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--color-tint); }
+  .buy-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s ease; }
+  .buy:hover .buy-art img { transform: scale(1.03); }
+  .buy-body { display: grid; gap: 1rem; padding: 22px 24px 24px; }
+  .buy-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.7rem; margin: 0; }
+  .buy-price strong { font-size: 2.2rem; font-weight: 500; line-height: 1; color: var(--color-ink); }
+  .buy-price s { font-size: 0.95rem; color: var(--color-soft); }
+  .buy-price em { font-style: normal; font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 999px; background: #fdebea; color: var(--color-red); }
+  .buy .btn { width: 100%; }
+  .buy-list { display: grid; gap: 0.55rem; padding-top: 1rem; border-top: 1px solid var(--color-line); }
+  .buy-list li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 0.6rem; font-size: 0.88rem; line-height: 1.45; color: var(--color-body); }
+  .buy-list svg { width: 16px; height: 16px; margin-top: 2px; color: var(--color-blue); }
+
+  /* Shown on small screens once the card's buy button has scrolled away */
+  .buy-bar { position: fixed; inset: auto 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-line); background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(10px); transform: translateY(110%); transition: transform 0.35s ease; }
+  .buy-bar.show { transform: none; }
+  .buy-bar strong { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 500; color: var(--color-ink); }
+  .buy-bar .btn { min-height: 42px; }
+  @media (min-width: 1040px) { .buy-bar { display: none; } }
+
+  /* Curriculum */
+  .curriculum-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem 1rem; margin-bottom: 1rem; }
+  .curriculum-head h2 { margin: 0; }
+  .curriculum-head .text-btn { margin: 0; }
+  .module { border-top: 1px solid var(--color-line); }
+  .module:last-of-type { border-bottom: 1px solid var(--color-line); }
+  .module summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 18px 4px; cursor: pointer; list-style: none; transition: color 0.2s; }
   .module summary::-webkit-details-marker { display: none; }
-  .module summary span { display: grid; gap: 0.2rem; min-width: 0; }
-  .module summary strong { font-size: 1.08rem; font-weight: 600; color: var(--color-ink); overflow-wrap: anywhere; }
-  .module summary small, .module li small { font-size: 0.88rem; color: var(--color-soft); }
-  .module summary svg { width: 22px; height: 22px; flex: none; color: var(--color-blue); transition: transform 0.18s; }
+  .module summary span { display: grid; gap: 0.15rem; min-width: 0; }
+  .module summary strong { font-size: 1.02rem; font-weight: 600; color: var(--color-ink); overflow-wrap: anywhere; transition: color 0.2s; }
+  .module summary small { font-size: 0.86rem; color: var(--color-soft); }
+  .module summary svg { width: 20px; height: 20px; flex: none; color: var(--color-soft); transition: transform 0.3s, color 0.2s; }
+  .module summary:hover strong, .module summary:hover svg { color: var(--color-blue); }
   .module[open] summary svg { transform: rotate(180deg); }
-  .module summary:hover strong { color: var(--color-blue); }
-  .module ul { border-top: 1px solid var(--color-line); padding: 6px 22px 10px; }
-  .module li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 0.8rem; align-items: start; padding: 0.7rem 0; font-size: 0.97rem; color: var(--color-ink); }
-  .module li + li { border-top: 1px solid var(--color-tint-2); }
-  .module li svg { width: 18px; height: 18px; margin-top: 3px; color: var(--color-soft); }
+  /* Smooth open and close where the browser supports animating to "auto" height */
+  .module::details-content { block-size: 0; overflow: hidden; transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete; }
+  .module[open]::details-content { block-size: auto; }
+  .module ul { display: grid; gap: 2px; padding: 0 0 14px; }
+  .module li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 0.75rem; align-items: start; padding: 0.55rem 0.6rem; border-radius: 8px; font-size: 0.93rem; color: var(--color-ink); transition: background 0.15s; }
+  .module li:hover { background: var(--color-tint); }
+  .module li svg { width: 16px; height: 16px; margin-top: 3px; color: var(--color-soft); }
   .module li span { min-width: 0; overflow-wrap: anywhere; }
-  .module li small { white-space: nowrap; padding-top: 1px; }
-  .module li em { margin-left: 0.6rem; font-style: normal; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--color-tint-2); color: var(--color-blue); white-space: nowrap; }
-  .person { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; }
-  .person img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; flex: none; }
+  .module li small { font-size: 0.84rem; color: var(--color-soft); white-space: nowrap; font-variant-numeric: tabular-nums; padding-top: 1px; }
+  .module li em { margin-left: 0.5rem; font-style: normal; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.1rem 0.45rem; border-radius: 999px; background: var(--color-tint-2); color: var(--color-blue); white-space: nowrap; }
+
+  /* Instructor */
+  .person { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+  .person img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
+  .person strong { display: block; font-size: 1.1rem; font-weight: 600; color: var(--color-ink); }
+  .person a { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.9rem; font-weight: 600; color: var(--color-blue); }
+  .person a svg { width: 15px; height: 15px; }
   .bg-navy .link { color: var(--color-white); }
-  .why { max-width: 820px; }
-  .why p { font-size: 1.05rem; line-height: 1.7; }
+
+  /* Fade sections in as they scroll into view (only when scripts run, and not for reduced motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+  }
 
   /* Form */
   .form { display: grid; gap: 1rem; padding: clamp(22px, 3vw, 36px); border: 1px solid var(--color-line); border-radius: 20px; background: var(--color-white); }

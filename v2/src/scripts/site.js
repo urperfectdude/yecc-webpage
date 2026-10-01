@@ -108,3 +108,60 @@ if (form) {
     location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent("YECC discussion request")}&body=${encodeURIComponent(body)}`;
   });
 }
+
+// Course page: sections fade in as they come into view
+const reveals = document.querySelectorAll(".reveal");
+if (reveals.length && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  reveals.forEach((el) => io.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add("in"));
+}
+
+// Course page: "Read more" on the description, hidden when the text already fits
+document.querySelectorAll("[data-more]").forEach((root) => {
+  const text = root.querySelector("p");
+  const btn = root.querySelector("button");
+  if (text.scrollHeight <= text.clientHeight + 4) {
+    root.classList.add("open");
+    btn.hidden = true;
+    return;
+  }
+  btn.addEventListener("click", () => {
+    const open = root.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.querySelector("span").textContent = open ? "Show less" : "Read more";
+  });
+});
+
+// Course page: expand or collapse every module at once
+const expandAll = document.querySelector("[data-expand-all]");
+if (expandAll) {
+  const modules = [...document.querySelectorAll("details.module")];
+  const sync = () => (expandAll.textContent = modules.every((m) => m.open) ? "Collapse all" : "Expand all");
+  expandAll.addEventListener("click", () => {
+    const open = !modules.every((m) => m.open);
+    modules.forEach((m) => (m.open = open));
+    sync();
+  });
+  modules.forEach((m) => m.addEventListener("toggle", sync));
+  sync();
+}
+
+// Course page on small screens: a buy bar slides up once the card's buy button has scrolled away
+const buyAnchor = document.querySelector("[data-buy-anchor]");
+const buyBar = document.querySelector(".buy-bar");
+if (buyAnchor && buyBar && "IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => {
+    const show = !e.isIntersecting && e.boundingClientRect.top < 0;
+    buyBar.classList.toggle("show", show);
+    buyBar.inert = !show;
+  }).observe(buyAnchor);
+}

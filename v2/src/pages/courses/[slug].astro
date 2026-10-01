@@ -4,12 +4,7 @@ import type { ImageMetadata } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import Icon from "../../components/Icon.astro";
 import Btn from "../../components/Btn.astro";
-import TextLink from "../../components/TextLink.astro";
-import Head from "../../components/Head.astro";
-import Section from "../../components/Section.astro";
 import Checks from "../../components/Checks.astro";
-import Chips from "../../components/Chips.astro";
-import Cta from "../../components/Cta.astro";
 import courses from "../../data/courses.json";
 import { LOGIN } from "../../lib/site";
 
@@ -23,10 +18,9 @@ const image = (name?: string) => (name ? images[`../../assets/courses/${name}`]?
 const thumbnail = image(c.thumbnail);
 const photo = image(c.photo);
 
-const facts = [["Instructor", c.instructor], ["Course content", c.content], ["Total duration", c.duration], ["Mode of delivery", c.mode]].filter(([, v]) => v) as string[][];
 const lessonIcon: Record<string, string> = { video: "video", test: "file", assignment: "book" };
-const moduleCount = c.modules.length;
 const instructor = c.instructor?.replace(", YECC", "");
+const lessons = c.modules.reduce((n, m) => n + m.lessons.length, 0);
 const description = c.description.split(". ")[0] + ".";
 const schema = {
   "@type": "Course",
@@ -38,100 +32,101 @@ const schema = {
 };
 ---
 <Layout path="/courses" title={`${c.title} | YECC Self-paced Course`} description={description} schema={schema}>
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-grid split">
-        <div>
-          <p class="eyebrow">Self-paced course</p>
-          <h1>{c.title}</h1>
-          <Chips items={facts.slice(0, 3).map(([, v]) => v)} />
-          <div class="btns">
-            <Btn href={c.url}>Buy Now</Btn>
-            <Btn href="#course-content" ghost>View course content</Btn>
-          </div>
-        </div>
-        <div class="buy">
+  <div class="wrap course">
+    <header class="course-intro">
+      <p class="eyebrow">Self-paced course</p>
+      <h1>{c.title}</h1>
+      <ul class="course-meta">
+        {instructor && <li><Icon name="users" />{instructor}</li>}
+        <li><Icon name="video" />{c.content}</li>
+        <li><Icon name="clock" />{c.duration}</li>
+      </ul>
+    </header>
+
+    <aside class="course-aside" aria-label="Enrol">
+      <div class="buy">
+        {thumbnail && (
+          <div class="buy-art"><Image src={thumbnail} alt={`${c.title} course artwork`} width={680} loading="eager" /></div>
+        )}
+        <div class="buy-body">
           <p class="buy-price">
-            <strong class="serif">{c.price}</strong>
+            <strong>{c.price}</strong>
             {c.original && <s>{c.original}</s>}
             {c.off && <em>{c.off}</em>}
           </p>
-          <Btn href={c.url}>Buy Now</Btn>
-          <h3>This course includes</h3>
-          <Checks items={c.includes} />
+          <span data-buy-anchor><Btn href={c.url}>Buy Now</Btn></span>
+          <ul class="buy-list">{c.includes.map((item) => <li><Icon name="check" /><span>{item}</span></li>)}</ul>
         </div>
       </div>
-    </div>
-  </section>
+    </aside>
 
-  <Section id="about">
-    <div class="split items-start">
-      <div>
-        <p class="eyebrow">About this course</p>
-        <p class="lead">{c.description}</p>
-        <dl class="facts mt-8">
-          {facts.map(([k, v]) => <div><dt>{k}</dt><dd class="small">{v}</dd></div>)}
-        </dl>
-      </div>
-      {thumbnail && <Image class="thumb" src={thumbnail} alt={`${c.title} course artwork`} width={880} />}
-    </div>
-  </Section>
+    <div class="course-main">
+      <section class="course-part reveal" id="about">
+        <h2>About this course</h2>
+        <div class="more" data-more>
+          <p>{c.description}</p>
+          <button type="button" aria-expanded="false"><span>Read more</span><Icon name="chevron" /></button>
+        </div>
+        {c.mode && <p class="muted mt-4">Delivered as: {c.mode}</p>}
+      </section>
 
-  <Section class="bg-tint">
-    <Head eyebrow="Who it is for" title="This course| is ideal for" />
-    <Checks class="ideal" items={c.ideal} />
-  </Section>
+      <section class="course-part reveal">
+        <h2>Who it is for</h2>
+        <Checks items={c.ideal} />
+      </section>
 
-  <Section id="course-content">
-    <Head
-      eyebrow="Course content"
-      title={`${c.content.replaceAll(" · ", ", ")}| across ${moduleCount} module${moduleCount > 1 ? "s" : ""}.`}
-      lead={`Total duration: ${c.duration}`}
-    />
-    {c.modules.map((m, i) => (
-      <details class="module" open={i === 0}>
-        <summary>
-          <span><strong>{m.name}</strong><small>{m.total} · {m.count}</small></span>
-          <Icon name="chevron" />
-        </summary>
-        <ul>
-          {m.lessons.map((l) => (
-            <li>
-              <Icon name={lessonIcon[l.kind]} />
-              <span>{l.title}{l.preview && <em>Preview</em>}</span>
-              <small>{l.meta}</small>
-            </li>
-          ))}
-        </ul>
-      </details>
-    ))}
-  </Section>
+      <section class="course-part reveal" id="course-content">
+        <div class="curriculum-head">
+          <h2>Course content</h2>
+          <button type="button" class="text-btn" data-expand-all>Expand all</button>
+        </div>
+        <p class="muted mb-4">
+          {c.modules.length} module{c.modules.length > 1 ? "s" : ""} · {lessons} items · {c.duration}
+        </p>
+        {c.modules.map((m, i) => (
+          <details class="module" open={i === 0}>
+            <summary>
+              <span><strong>{m.name}</strong><small>{m.count} · {m.total.replace("Total ", "")}</small></span>
+              <Icon name="chevron" />
+            </summary>
+            <ul>
+              {m.lessons.map((l) => (
+                <li>
+                  <Icon name={lessonIcon[l.kind]} />
+                  <span>{l.title}{l.preview && <em>Preview</em>}</span>
+                  <small>{l.meta}</small>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </section>
 
-  {c.bio.length > 0 && (
-    <Section class="bg-navy">
-      <div class="split">
-        <div class="person">
-          {photo && <Image src={photo} alt={instructor ?? ""} width={224} height={224} />}
-          <div>
-            <p class="eyebrow">Instructor profile</p>
-            <h2>{instructor}</h2>
-            {c.linkedin && <p class="mt-2.5 mb-0"><TextLink href={c.linkedin}>LinkedIn profile</TextLink></p>}
+      {c.bio.length > 0 && (
+        <section class="course-part reveal">
+          <h2>Your instructor</h2>
+          <div class="person">
+            {photo && <Image src={photo} alt="" width={128} height={128} />}
+            <div>
+              <strong>{instructor}</strong>
+              {c.linkedin && <a href={c.linkedin} target="_blank" rel="noopener">LinkedIn<Icon name="go" /></a>}
+            </div>
           </div>
-        </div>
-        <Checks items={c.bio} />
-      </div>
-    </Section>
-  )}
+          <Checks items={c.bio} />
+        </section>
+      )}
 
-  {c.why.length > 0 && (
-    <Section>
-      <Head title="Why YECC courses| are different?" />
-      <div class="why">{c.why.map((p) => <p>{p}</p>)}</div>
-    </Section>
-  )}
+      {c.why.length > 0 && (
+        <section class="course-part reveal">
+          <h2>Why YECC courses are different</h2>
+          {c.why.map((p) => <p class="mb-4">{p}</p>)}
+        </section>
+      )}
+    </div>
+  </div>
 
-  <Cta eyebrow="Continue learning" title="Access your YECC account to explore and enrol in a course.">
+  <div class="buy-bar" inert>
+    <strong>{c.price}</strong>
     <Btn href={c.url}>Buy Now</Btn>
-    <Btn href={LOGIN} ghost>Consultant Login</Btn>
-  </Cta>
+  </div>
 </Layout>
