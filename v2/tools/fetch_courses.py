@@ -9,6 +9,7 @@ tools/.cache; delete that folder to pull fresh content. Run from anywhere: pytho
 from html import unescape
 from pathlib import Path
 from urllib.parse import quote, unquote
+import ast
 import json
 import re
 import subprocess
@@ -68,6 +69,20 @@ def image(url):
         # curl, not urllib: the image CDN answers Python's client with 403.
         subprocess.run(["curl", "-sSfkL", "-o", str(target), quote(unquote(url), safe=":/")], check=True, timeout=120)
     return name
+
+
+def catalog_tags():
+    """Audience, functional area, product and pricing tags from the old site's course API, keyed by course path."""
+    f = CACHE / "getCourses.json"
+    if not f.is_file():
+        CACHE.mkdir(parents=True, exist_ok=True)
+        # The API answers only requests that carry the site's Origin header.
+        subprocess.run(["curl", "-sSf", "-o", str(f), "-H", f"Origin: {ORIGIN}", "https://api.yourerpcoach.com/courses/getCourses"], check=True, timeout=60)
+    read = lambda v: ast.literal_eval(v) if isinstance(v, str) else (v or [])
+    return {
+        c["Url"].split("/")[0]: {"audience": read(c["IntendentAudience"]), "areas": read(c["FunctionalArea"]), "product": read(c["Product"]), "pricing": read(c["Pricing"])}
+        for c in json.loads(f.read_text(encoding="utf-8"))["data"]
+    }
 
 
 def money(text):
@@ -141,7 +156,8 @@ def parse(path):
 
 
 if __name__ == "__main__":
-    courses = [parse(p) for p in PATHS]
+    tags = catalog_tags()
+    courses = [{**parse(p), **tags[p.split("/")[0]]} for p in PATHS]
     (SRC / "data" / "courses.json").write_text(json.dumps(courses, ensure_ascii=False, indent=1), encoding="utf-8")
     for c in courses:
         print(c["slug"], c["price"], c["original"], c["off"], len(c["modules"]), "modules", sum(len(m["lessons"]) for m in c["modules"]), "items")

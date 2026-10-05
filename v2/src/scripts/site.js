@@ -166,17 +166,38 @@ if (buyAnchor && buyBar && "IntersectionObserver" in window) {
   }).observe(buyAnchor);
 }
 
-// Course catalog: filter cards by topic
-const filters = document.querySelector("[data-filters]");
-if (filters) {
-  const cards = document.querySelectorAll(".course-card[data-topic]");
-  filters.addEventListener("click", (e) => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-    filters.querySelectorAll("button").forEach((b) => {
-      b.classList.toggle("on", b === btn);
-      b.setAttribute("aria-pressed", b === btn);
+// Course catalog: filter by audience and functional area as soon as a choice is made. The choices are kept in
+// the address (?audience=...&area=...) so a filtered list can be shared or bookmarked.
+const filterForm = document.querySelector("[data-filters]");
+if (filterForm) {
+  const cards = [...document.querySelectorAll(".course-card")];
+  const selects = [...filterForm.querySelectorAll("select")];
+  const reset = filterForm.querySelector('[type="reset"]');
+  const count = filterForm.querySelector("[data-count]");
+  const empty = document.querySelector("[data-empty]");
+  const apply = () => {
+    const chosen = Object.fromEntries(selects.map((s) => [s.name, s.value]));
+    let shown = 0;
+    cards.forEach((card) => {
+      const match = selects.every((s) => !s.value || card.dataset[s.name].split("|").includes(s.value));
+      card.hidden = !match;
+      if (match) shown++;
     });
-    cards.forEach((card) => (card.hidden = !!btn.dataset.topic && card.dataset.topic !== btn.dataset.topic));
+    selects.forEach((s) => s.classList.toggle("set", !!s.value));
+    reset.hidden = selects.every((s) => !s.value);
+    count.textContent = shown;
+    count.parentElement.lastChild.textContent = shown === 1 ? " course" : " courses";
+    empty.hidden = shown > 0;
+    const url = new URL(location.href);
+    Object.entries(chosen).forEach(([k, v]) => (v ? url.searchParams.set(k, v) : url.searchParams.delete(k)));
+    history.replaceState(null, "", url);
+  };
+  const params = new URLSearchParams(location.search);
+  selects.forEach((s) => {
+    if ([...s.options].some((o) => o.value === params.get(s.name))) s.value = params.get(s.name);
   });
+  filterForm.addEventListener("change", apply);
+  filterForm.addEventListener("reset", () => setTimeout(apply));
+  document.querySelector("[data-clear]")?.addEventListener("click", () => filterForm.reset());
+  apply();
 }

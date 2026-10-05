@@ -493,10 +493,21 @@
   .catalog-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; }
   .catalog-head h1 { max-width: 20ch; font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); line-height: 1.12; text-wrap: balance; }
   .catalog-head .muted { margin: 0; }
-  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: clamp(28px, 4vw, 40px) 0 24px; }
-  .filters button { flex: none; padding: 0.5rem 1rem; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-white); font-size: 0.9rem; font-weight: 500; color: var(--color-body); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-  .filters button:hover { border-color: var(--color-ink); color: var(--color-ink); }
-  .filters button.on { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-white); }
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.75rem; margin: clamp(28px, 4vw, 40px) 0 24px; }
+  .select { position: relative; display: inline-flex; min-width: 0; max-width: 100%; }
+  .select select { appearance: none; max-width: 100%; padding: 0.55rem 2.4rem 0.55rem 1rem; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-white); font-size: 0.92rem; font-weight: 500; color: var(--color-ink); text-overflow: ellipsis; cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s; }
+  .select select:hover { border-color: var(--color-ink); }
+  .select select:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
+  .select select.set { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-white); }
+  .select select.set option { background: var(--color-white); color: var(--color-ink); }
+  .select svg { position: absolute; right: 0.9rem; top: 50%; width: 16px; height: 16px; margin-top: -8px; pointer-events: none; color: var(--color-soft); transition: color 0.2s; }
+  .select select.set + svg { color: var(--color-white); }
+  .filters .text-btn { margin: 0; }
+  .filter-count { margin: 0 0 0 auto; font-size: 0.9rem; }
+  .filter-count span { font-weight: 600; color: var(--color-ink); }
+  .filter-empty { padding: 48px 0; text-align: center; color: var(--color-body); }
+  .filter-empty p { margin: 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .course-grid { display: grid; gap: 20px; }
   @media (min-width: 640px) { .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1040px) { .course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -507,7 +518,7 @@
   .course-card-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s ease; }
   .course-card:hover .course-card-art img { transform: scale(1.04); }
   .course-card-body { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; padding: 20px 22px 22px; }
-  .course-card-topic { margin: 0; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-soft); }
+  .course-card-topic { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-soft); }
   .course-card h2 { font-size: 1.25rem; line-height: 1.25; transition: color 0.2s; }
   .course-card:hover h2 { color: var(--color-blue); }
   .course-card-text { margin: 0; font-size: 0.92rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }

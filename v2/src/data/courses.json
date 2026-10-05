@@ -284,7 +284,21 @@
    }
   ],
   "bio": [],
-  "why": []
+  "why": [],
+  "audience": [
+   "Fresher Graduates"
+  ],
+  "areas": [
+   "Financials",
+   "Supply Chain Management",
+   "Human Capital Management"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
+  ]
  },
  {
   "slug": "basics-of-erp-2024",
@@ -514,6 +528,25 @@
    "Our video content is not meant to make you just ‘ERP Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!",
    "Practice Assignments (in Free Course) are generally of a nature where you will need to do some R&D on internet and/ or write the answer in your own words. From the perspective of Free Course, these assignments have the objective to assess your comprehension skills (how well you understand the question), problem solving skills (how well you can find the answers yourself), and drafting skills (how well you can present your thoughts in your own words)! Please attempt the assignments keeping in mind these points - to make the most out of it!"
+  ],
+  "audience": [
+   "End Users",
+   "Experienced Consultants",
+   "Fresher Graduates"
+  ],
+  "areas": [
+   "Financials",
+   "Supply Chain Management",
+   "Human Capital Management",
+   "Technical",
+   "Enterprise Performance Management",
+   "Project Portfolio Management"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -996,6 +1029,19 @@
   "why": [
    "We don’t believe Oracle Cloud Financials can be completely taught/ learnt within a short duration. It is continuous/ life-long process! Thus, our focus is NOT to ‘teach you ENTIRE Oracle Cloud Financials’, but to prepare you to ‘LEARN Oracle Cloud Financials YOURSELF’.",
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind."
+  ],
+  "audience": [
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials",
+   "Supply Chain Management"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -1281,6 +1327,18 @@
    "We don’t believe Oracle Cloud ERP can be completely taught/ learnt within a short duration. It is continuous/ life-long process! Thus, our focus is NOT to ‘teach our trainees ENTIRE Oracle Cloud ERP’, but to prepare them to ‘LEARN Oracle Cloud THEMSELVES’.",
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!"
+  ],
+  "audience": [
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -1611,6 +1669,20 @@
    "We don’t believe Oracle Cloud ERP can be completely taught/ learnt within a short duration. It is continuous/ life-long process! Thus, our focus is NOT to ‘teach our trainees ENTIRE Oracle Cloud ERP’, but to prepare them to ‘LEARN Oracle Cloud THEMSELVES’.",
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants",
+   "End Users"
+  ],
+  "areas": [
+   "Supply Chain Management"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -2089,6 +2161,19 @@
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!",
    "Practice Assignments are generally of a nature where you will need to test few business cases/ processes/ scenarios in Oracle Cloud ERP Instance & record your conclusions along with relevant screenshots attachments on the portal - which will be checked by our Experts. If they are not satisfied with your answers, you will be asked to re-attempt the Assignment within the portal itself - until your answer is correct! That will ensure that you have truly learnt the concept & you know how to actually use that knowledge on Oracle Cloud ERP system!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -2464,6 +2549,20 @@
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!",
    "Practice Assignments are generally of a nature where you will need to test few business cases/ processes/ scenarios in Oracle Cloud ERP Instance & record your conclusions along with relevant screenshots attachments on the portal - which will be checked by our Experts. If they are not satisfied with your answers, you will be asked to re-attempt the Assignment within the portal itself - until your answer is correct! That will ensure that you have truly learnt the concept & you know how to actually use that knowledge on Oracle Cloud ERP system!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials",
+   "Supply Chain Management"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -2599,6 +2698,19 @@
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!",
    "Practice Assignments are generally of a nature where you will need to test few business cases/ processes/ scenarios in Oracle Cloud ERP Instance & record your conclusions along with relevant screenshots attachments on the portal - which will be checked by our Experts. If they are not satisfied with your answers, you will be asked to re-attempt the Assignment within the portal itself - until your answer is correct! That will ensure that you have truly learnt the concept & you know how to actually use that knowledge on Oracle Cloud ERP system!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -2890,6 +3002,19 @@
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!",
    "Practice Assignments are generally of a nature where you will need to test few business cases/ processes/ scenarios in Oracle Cloud ERP Instance & record your conclusions along with relevant screenshots attachments on the portal - which will be checked by our Experts. If they are not satisfied with your answers, you will be asked to re-attempt the Assignment within the portal itself - until your answer is correct! That will ensure that you have truly learnt the concept & you know how to actually use that knowledge on Oracle Cloud ERP system!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  },
  {
@@ -3138,6 +3263,19 @@
    "We don’t believe Oracle Cloud Financials can be completely taught/ learnt within a short duration. It is continuous/ life-long process! Thus, our focus is NOT to ‘teach you ENTIRE Oracle Cloud Financials’, but to prepare you to ‘LEARN Oracle Cloud Financials YOURSELF’.",
    "Our video content is not meant to make you just ‘Product Experts’; we want you to become the ‘Business Consultants’. And the entire course is built keeping that in mind.",
    "MCQ Test Questions for every video help you assess if you have understood the concepts explained in video properly or not. You can accordingly decide if you need a second/ third watch for a specific video!"
+  ],
+  "audience": [
+   "Fresher Graduates",
+   "Experienced Consultants"
+  ],
+  "areas": [
+   "Financials"
+  ],
+  "product": [
+   "Oracle Cloud ERP"
+  ],
+  "pricing": [
+   "Paid"
   ]
  }
 ]
