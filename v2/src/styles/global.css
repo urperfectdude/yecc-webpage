@@ -488,9 +488,40 @@
   .person a svg { width: 15px; height: 15px; }
   .bg-navy .link { color: var(--color-white); }
 
+  /* Course catalog: plain page, topic filter, cards that lift on hover */
+  .catalog { padding-block: clamp(40px, 6vw, 80px) clamp(64px, 8vw, 112px); }
+  .catalog-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; }
+  .catalog-head h1 { max-width: 20ch; font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); line-height: 1.12; text-wrap: balance; }
+  .catalog-head .muted { margin: 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: clamp(28px, 4vw, 40px) 0 24px; }
+  .filters button { flex: none; padding: 0.5rem 1rem; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-white); font-size: 0.9rem; font-weight: 500; color: var(--color-body); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .filters button:hover { border-color: var(--color-ink); color: var(--color-ink); }
+  .filters button.on { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-white); }
+  .course-grid { display: grid; gap: 20px; }
+  @media (min-width: 640px) { .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1040px) { .course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .course-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-white); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s; }
+  .course-card:hover { transform: translateY(-4px); border-color: var(--color-tint-2); box-shadow: 0 24px 48px -32px rgba(13, 35, 68, 0.45); }
+  .course-card[hidden] { display: none; }
+  .course-card-art { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--color-tint); }
+  .course-card-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s ease; }
+  .course-card:hover .course-card-art img { transform: scale(1.04); }
+  .course-card-body { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; padding: 20px 22px 22px; }
+  .course-card-topic { margin: 0; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-soft); }
+  .course-card h2 { font-size: 1.25rem; line-height: 1.25; transition: color 0.2s; }
+  .course-card:hover h2 { color: var(--color-blue); }
+  .course-card-text { margin: 0; font-size: 0.92rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .course-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: auto; padding-top: 1rem; }
+  .course-card-foot .muted { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; white-space: nowrap; }
+  .course-card-foot .muted svg { width: 15px; height: 15px; }
+  .course-card-foot .muted svg:nth-of-type(2) { margin-left: 0.6rem; }
+  .course-card-foot strong { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; color: var(--color-ink); }
+  .catalog-foot { margin: 40px 0 0; text-align: center; }
+
   /* Fade sections in as they scroll into view (only when scripts run, and not for reduced motion) */
   @media (prefers-reduced-motion: no-preference) {
-    .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease var(--d, 0ms), transform 0.6s ease var(--d, 0ms); }
+    .js .course-card.reveal.in { transition: opacity 0.6s ease var(--d, 0ms), transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s; }
     .js .reveal.in { opacity: 1; transform: none; }
   }
 

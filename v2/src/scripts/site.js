@@ -165,3 +165,18 @@ if (buyAnchor && buyBar && "IntersectionObserver" in window) {
     buyBar.inert = !show;
   }).observe(buyAnchor);
 }
+
+// Course catalog: filter cards by topic
+const filters = document.querySelector("[data-filters]");
+if (filters) {
+  const cards = document.querySelectorAll(".course-card[data-topic]");
+  filters.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    filters.querySelectorAll("button").forEach((b) => {
+      b.classList.toggle("on", b === btn);
+      b.setAttribute("aria-pressed", b === btn);
+    });
+    cards.forEach((card) => (card.hidden = !!btn.dataset.topic && card.dataset.topic !== btn.dataset.topic));
+  });
+}

@@ -1,60 +1,73 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import Btn from "../../components/Btn.astro";
+import Icon from "../../components/Icon.astro";
 import TextLink from "../../components/TextLink.astro";
-import Head from "../../components/Head.astro";
-import Hero from "../../components/Hero.astro";
-import Section from "../../components/Section.astro";
-import Card from "../../components/Card.astro";
-import Cta from "../../components/Cta.astro";
 import courses from "../../data/courses.json";
-import { LOGIN } from "../../lib/site";
+import { LOGIN, to } from "../../lib/site";
 
-// Short catalog blurbs and stats, in catalog order. Prices and the detail pages come from courses.json.
+// Short catalog blurbs in catalog order, grouped for the filter. Everything else comes from courses.json.
 const catalog = [
-  { slug: "erp-business-processes-overview", text: "Start your ERP consulting journey with an overview of essential business processes.", stats: ["11:40 Hrs", "21 Videos", "21 Tests"] },
-  { slug: "basics-of-erp-2024", text: "A beginner-friendly introduction to ERP, its functional areas, and consulting foundations.", stats: ["04:56 Hrs", "10 Videos", "10 Tests"] },
-  { slug: "oracle-cloud-p2p-fast-track-course", text: "Covers Oracle Cloud ERP common concepts, General Accounting, Payables, Procurement basics, and Cash Management.", stats: ["37:18 Hrs", "69 Videos", "4 GLP"] },
-  { slug: "oracle-cloud-expense", text: "Training on Oracle Cloud Expense module processes and setups.", stats: ["15:00 Hrs", "23 Videos", "17 Tests"] },
-  { slug: "oracle-cloud-scm-process-course", text: "Training on Oracle Cloud SCM processes, excluding setups.", stats: ["10:00 Hrs", "24 Videos", "23 Tests"] },
-  { slug: "oracle-cloud-erp-basics-and-general-accounting-2025-26", text: "Key concepts in Oracle Cloud ERP common topics and General Accounting.", stats: ["28:11 Hrs", "35 Videos", "35 Tests"] },
-  { slug: "oracle-cloud-erp-accounts-payable-2025-26", text: "Fundamentals of Oracle Cloud Accounts Payable and P2P concepts from the Payables side.", stats: ["24:23 Hrs", "27 Videos", "27 Tests"] },
-  { slug: "oracle-cloud-erp-cash-management-2025-26", text: "Fundamentals of the Oracle Cloud Cash Management module.", stats: ["6:38 Hrs", "7 Videos", "7 Tests"] },
-  { slug: "oracle-cloud-erp-accounts-receivable-2025-26", text: "Fundamentals of the Oracle Cloud Accounts Receivable module.", stats: ["19:39 Hrs", "20 Videos", "20 Tests"] },
-  { slug: "oracle-cloud-erp-fixed-assets-2025-26", text: "Fundamentals of the Oracle Cloud Fixed Assets module.", stats: ["18:13 Hrs", "20 Videos", "20 Tests"] },
+  { slug: "erp-business-processes-overview", topic: "ERP foundations", text: "Start your ERP consulting journey with an overview of essential business processes." },
+  { slug: "basics-of-erp-2024", topic: "ERP foundations", text: "A beginner-friendly introduction to ERP, its functional areas, and consulting foundations." },
+  { slug: "oracle-cloud-p2p-fast-track-course", topic: "Oracle Financials", text: "Covers Oracle Cloud ERP common concepts, General Accounting, Payables, Procurement basics, and Cash Management." },
+  { slug: "oracle-cloud-expense", topic: "Oracle Financials", text: "Training on Oracle Cloud Expense module processes and setups." },
+  { slug: "oracle-cloud-scm-process-course", topic: "Oracle Supply Chain", text: "Training on Oracle Cloud SCM processes, excluding setups." },
+  { slug: "oracle-cloud-erp-basics-and-general-accounting-2025-26", topic: "Oracle Financials", text: "Key concepts in Oracle Cloud ERP common topics and General Accounting." },
+  { slug: "oracle-cloud-erp-accounts-payable-2025-26", topic: "Oracle Financials", text: "Fundamentals of Oracle Cloud Accounts Payable and P2P concepts from the Payables side." },
+  { slug: "oracle-cloud-erp-cash-management-2025-26", topic: "Oracle Financials", text: "Fundamentals of the Oracle Cloud Cash Management module." },
+  { slug: "oracle-cloud-erp-accounts-receivable-2025-26", topic: "Oracle Financials", text: "Fundamentals of the Oracle Cloud Accounts Receivable module." },
+  { slug: "oracle-cloud-erp-fixed-assets-2025-26", topic: "Oracle Financials", text: "Fundamentals of the Oracle Cloud Fixed Assets module." },
 ].map((item) => ({ ...item, course: courses.find((c) => c.slug === item.slug)! }));
+const topics = [...new Set(catalog.map((c) => c.topic))];
+
+const images = import.meta.glob<{ default: ImageMetadata }>("../../assets/courses/*", { eager: true });
+const art = (name: string) => images[`../../assets/courses/${name}`]?.default;
+const videos = (content: string) => content.split(" · ")[0];
 ---
 <Layout
   path="/courses"
   title="Self-paced Oracle Cloud ERP Courses | YECC"
   description="Explore YECC self-paced courses covering ERP fundamentals, business processes, and Oracle Cloud ERP functional modules."
 >
-  <Hero
-    eyebrow="Self-paced courses"
-    title="Build practical Oracle Cloud ERP skills| at your own pace."
-    lead="Explore YECC courses covering ERP fundamentals, business processes, and Oracle Cloud ERP functional modules."
-  >
-    <Btn href="#course-catalog">Explore all courses</Btn>
-    <Btn href={LOGIN} ghost>Consultant Login</Btn>
-  </Hero>
+  <div class="wrap catalog">
+    <header class="catalog-head">
+      <div>
+        <p class="eyebrow">Self-paced courses</p>
+        <h1>Build practical Oracle Cloud ERP skills<span class="tone"> at your own pace.</span></h1>
+      </div>
+      <p class="muted">{catalog.length} courses · recorded lessons and assessments</p>
+    </header>
 
-  <Section id="course-catalog">
-    <Head eyebrow="Course catalog" title="All self-paced courses." lead="Select a course to build focused capability through recorded lessons and assessments." />
-    <div class="grid c3">
-      {catalog.map((item, i) => (
-        <Card title={item.course.title} text={item.text}>
-          <Fragment slot="top">
-            <span class="num">Course {String(i + 1).padStart(2, "0")}</span>
-            <span class="price">{item.course.price}</span>
-          </Fragment>
-          <div class="stats">{item.stats.map((s) => <span>{s}</span>)}</div>
-          <TextLink href={`/courses/${item.slug}`}>Explore course</TextLink>
-        </Card>
-      ))}
+    <div class="filters" role="toolbar" aria-label="Filter courses by topic" data-filters>
+      <button type="button" class="on" data-topic="" aria-pressed="true">All</button>
+      {topics.map((t) => <button type="button" data-topic={t} aria-pressed="false">{t}</button>)}
     </div>
-  </Section>
 
-  <Cta eyebrow="Continue learning" title="Access your YECC account to explore and enrol in a course.">
-    <Btn href={LOGIN}>Consultant Login</Btn>
-  </Cta>
+    <div class="course-grid" id="course-catalog">
+      {catalog.map((item, i) => {
+        const image = art(item.course.thumbnail);
+        return (
+          <a class="course-card reveal" href={to(`/courses/${item.slug}`)} data-topic={item.topic} style={`--d:${(i % 3) * 70}ms`}>
+            <div class="course-card-art">{image && <Image src={image} alt="" width={640} />}</div>
+            <div class="course-card-body">
+              <p class="course-card-topic">{item.topic}</p>
+              <h2>{item.course.title}</h2>
+              <p class="course-card-text">{item.text}</p>
+              <div class="course-card-foot">
+                <span class="muted">
+                  <Icon name="video" />{videos(item.course.content)}
+                  <Icon name="clock" />{item.course.duration.replace(" Hours", " hrs")}
+                </span>
+                <strong>{item.course.price}</strong>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <p class="catalog-foot muted">Already enrolled? <TextLink href={LOGIN}>Consultant Login</TextLink></p>
+  </div>
 </Layout>
