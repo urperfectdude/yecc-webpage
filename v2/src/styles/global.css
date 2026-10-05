@@ -227,6 +227,10 @@
   a.card h3 svg { width: 22px; height: 22px; margin-top: 2px; flex: none; color: var(--color-blue); transition: transform 0.18s; }
   a.card:hover h3 svg { transform: translate(3px, -3px); }
   .card p { margin: 0; }
+  /* Small engagement-stage chips under a card title */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: -0.2rem; }
+  .tags li { padding: 0.2rem 0.65rem; border-radius: 999px; background: var(--color-tint); font-size: 0.78rem; font-weight: 600; color: var(--color-body); white-space: nowrap; }
+  .tags li:first-child { background: var(--color-tint-2); color: var(--color-blue); }
   .card-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
   .num { font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-red); font-weight: 500; }
   .icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--color-tint-2); color: var(--color-blue); flex: none; }

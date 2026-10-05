@@ -2,8 +2,8 @@
 import Icon from "./Icon.astro";
 import Checks from "./Checks.astro";
 import { to } from "../lib/site";
-interface Props { title: string; text: string; bullets?: string[]; icon?: string; num?: string; id?: string; href?: string }
-const { title, text, bullets, icon, num, id, href } = Astro.props;
+interface Props { title: string; text: string; bullets?: string[]; icon?: string; num?: string; id?: string; href?: string; tags?: string[] }
+const { title, text, bullets, icon, num, id, href, tags } = Astro.props;
 // A card with an href is clickable as a whole and carries an arrow so it reads that way.
 const Tag = href ? "a" : "div";
 ---
@@ -16,6 +16,7 @@ const Tag = href ? "a" : "div";
     </div>
   )}
   <h3>{title}{href && <Icon name="go" />}</h3>
+  {tags && <ul class="tags">{tags.map((t) => <li>{t}</li>)}</ul>}
   <p>{text}</p>
   {bullets && <Checks items={bullets} />}
   <slot />
