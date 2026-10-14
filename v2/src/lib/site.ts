@@ -38,9 +38,9 @@ export const NAV: NavItem[] = [
     label: "Consulting Training",
     href: "/talent-pathways",
     children: [
-      { label: "Corporate Fresher Training", href: "/talent-pathways#corporate-fresher-training", group: "For SIs" },
-      { label: "Self-paced Courses", href: "/courses", group: "For Freshers and Domain Experts" },
-      { label: "Fresher Training Cohorts", href: "/upcoming-cohorts", group: "For Freshers and Domain Experts" },
+      { label: "Corporate Fresher Training", href: "/talent-pathways#corporate-fresher-training", group: "FOR SIs" },
+      { label: "Self-paced Courses", href: "/courses", group: "FOR FRESHERS AND DOMAIN EXPERTS" },
+      { label: "Fresher Training Cohorts", href: "/upcoming-cohorts", group: "FOR FRESHERS AND DOMAIN EXPERTS" },
     ],
   },
 ];
