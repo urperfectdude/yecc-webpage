@@ -19,12 +19,12 @@ export function to(href: string): string {
 
 export const isExternal = (href: string) => /^https?:/.test(href);
 
-export type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
+export type NavItem = { label: string; href: string; children?: { label: string; href: string; group?: string }[] };
 
 export const NAV: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "Partnerships",
+    label: "SI Partnerships",
     href: "/partnerships",
     children: [
       { label: "Overview", href: "/partnerships" },
@@ -38,12 +38,11 @@ export const NAV: NavItem[] = [
     label: "Consulting Training",
     href: "/talent-pathways",
     children: [
-      { label: "Self-paced Courses", href: "/courses" },
-      { label: "Corporate Fresher Training for SIs", href: "/talent-pathways#corporate-fresher-training" },
-      { label: "Fresher Training Cohorts", href: "/upcoming-cohorts" },
+      { label: "Corporate Fresher Training", href: "/talent-pathways#corporate-fresher-training", group: "For SIs" },
+      { label: "Self-paced Courses", href: "/courses", group: "For Freshers and Domain Experts" },
+      { label: "Fresher Training Cohorts", href: "/upcoming-cohorts", group: "For Freshers and Domain Experts" },
     ],
   },
-  { label: "ERPNext", href: "/erpnext-implementation" },
 ];
 
 export const SOCIAL = [

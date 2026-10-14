@@ -24,7 +24,13 @@ const current = (href: string) => href.split("#")[0] === path;
               <button type="button" aria-expanded="false" class:list={{ current: item.children.some((c) => current(c.href)) }}>
                 {item.label}<Icon name="chevron" />
               </button>
-              <div class="dropdown">{item.children.map((c) => <a href={to(c.href)}>{c.label}</a>)}</div>
+              <div class="dropdown">
+                {/* A child that starts a new group gets a small label above it. */}
+                {item.children.map((c, i) => <>
+                  {c.group && c.group !== item.children![i - 1]?.group && <span class="dropdown-label">{c.group}</span>}
+                  <a href={to(c.href)}>{c.label}</a>
+                </>)}
+              </div>
             </div>
           ) : (
             <a href={to(item.href)} class:list={{ current: current(item.href) }} aria-current={current(item.href) ? "page" : undefined}>{item.label}</a>
