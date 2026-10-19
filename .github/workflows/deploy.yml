@@ -1,6 +1,8 @@
-# Builds both Astro sites and publishes them to GitHub Pages:
+# Builds the Astro sites and publishes them to GitHub Pages:
 #   <pages url>/v1/  the current site
 #   <pages url>/v2/  the new design
+#   <pages url>/v3/  the new design with the latest review changes, built from the v3 branch
+# Pages only accepts deployments from main, so after pushing to v3, rerun this workflow on main.
 name: Deploy to GitHub Pages
 
 on:
@@ -22,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: v3
+          path: _v3
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -29,6 +35,7 @@ jobs:
           cache-dependency-path: |
             v1/package-lock.json
             v2/package-lock.json
+            _v3/v2/package-lock.json
       - id: pages
         uses: actions/configure-pages@v5
       - name: Build v1
@@ -43,12 +50,19 @@ jobs:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/v2
         run: npm ci && npm run build
+      - name: Build v3
+        working-directory: _v3/v2
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/v3
+        run: npm ci && npm run build
       - name: Assemble site
         run: |
           mkdir _site
           cp -r pages-root/. _site/
           cp -r v1/dist _site/v1
           cp -r v2/dist _site/v2
+          cp -r _v3/v2/dist _site/v3
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
