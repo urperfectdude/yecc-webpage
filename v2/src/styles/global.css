@@ -135,7 +135,6 @@
   .nav-item:hover button svg, .nav-item.open button svg { transform: rotate(180deg); }
   .header-cta { display: flex; align-items: center; gap: 0.5rem; flex: none; }
   .header-cta .btn { min-height: 40px; padding: 0.4rem 1rem; font-size: 0.9rem; }
-  .header-cta .btn svg { width: 14px; height: 14px; }
   /* Link across to the other audience: plain text with an underline, like a section switch */
   .audience { margin-right: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-blue); text-decoration-thickness: 2px; text-underline-offset: 6px; white-space: nowrap; }
   .audience:hover { color: var(--color-blue); }
@@ -284,6 +283,8 @@
   /* Phone mockups side by side; the screenshots stop mid-phone, so their bottoms fade out */
   .app-shots { display: flex; justify-content: center; align-items: flex-end; gap: clamp(12px, 3vw, 28px); -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
   .split .app-shots img { width: calc(50% - 14px); max-width: 260px; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 0; }
+  .stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.8rem; }
+  .split .stores img { width: auto; height: 48px; aspect-ratio: auto; border-radius: 0; }
   .split img.thumb { max-width: 440px; aspect-ratio: 1 / 1; object-fit: contain; justify-self: center; border: 1px solid var(--color-line); }
 
   /* Accordion feature (dark) */

@@ -22,6 +22,8 @@ export const isExternal = (href: string) => /^https?:/.test(href);
 export type NavItem = { label: string; href: string; children?: { label: string; href: string; group?: string }[] };
 
 export const APP = "/consultants#get-the-app";
+export const APP_STORE = "https://apps.apple.com/in/app/yecc/id6738484557";
+export const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.yourerpcoach.app&hl=en_IN";
 export const ECAMPUS = "https://ecampus.yourerpcoach.com";
 
 // The site has two audiences, each with its own menu. The header shows a plain link across to the other one.

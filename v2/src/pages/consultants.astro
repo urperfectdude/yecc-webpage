@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
 import Btn from "../components/Btn.astro";
-import Hero from "../components/Hero.astro";
+import Cta from "../components/Cta.astro";
+import LogoBand from "../components/LogoBand.astro";
 import Section from "../components/Section.astro";
 import Card from "../components/Card.astro";
 import Head from "../components/Head.astro";
@@ -9,23 +11,46 @@ import Checks from "../components/Checks.astro";
 import { Image } from "astro:assets";
 import quiz from "../assets/app/quiz.png";
 import jobs from "../assets/app/jobs.png";
-import { APP, ECAMPUS, LOGIN } from "../lib/site";
+import googlePlay from "../assets/app/google-play.png";
+import appStore from "../assets/app/app-store.png";
+import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, to, isExternal } from "../lib/site";
+const tiles = [
+  { icon: "users", label: "Fresher Training Cohorts", href: "/upcoming-cohorts" },
+  { icon: "video", label: "Self-paced Courses", href: "/courses" },
+  { icon: "app", label: "Mobile App", href: APP },
+  { icon: "cap", label: "eCampus", href: ECAMPUS },
+];
 ---
 <Layout
   path="/consultants"
   title="Oracle Cloud ERP Training for Consultants | YECC"
   description="Fresher training cohorts, self-paced Oracle Cloud ERP courses, the YECC mobile app, and eCampus for Oracle consultants and aspiring consultants."
 >
-  <Hero
-    eyebrow="YECC for Oracle Consultants"
-    title="Start or grow your| Oracle Cloud ERP consulting career."
-    lead="Live cohorts, self-paced courses, and learning on the go, built by Oracle consultants who train SI teams."
-  >
-    <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
-    <Btn href={LOGIN} ghost>Sign in</Btn>
-  </Hero>
+  {/* Same layout as the home page hero, aimed at consultants instead of SIs. */}
+  <section class="hero hero-home">
+    <div class="wrap">
+      <p class="eyebrow">YECC for Oracle Consultants</p>
+      <h1>Start your Oracle career.<span class="tone"> Grow it with YECC.</span></h1>
+      <p class="lead">Live cohorts, self-paced courses, and learning on the go, built by Oracle consultants who train SI teams.</p>
+      <p class="serif tiles-title">How can YECC help you?</p>
+      <div class="tiles">
+        {tiles.map((t) => <a href={to(t.href)} {...(isExternal(t.href) ? { target: "_blank", rel: "noopener" } : {})}><Icon name={t.icon} /><span>{t.label}</span></a>)}
+      </div>
+      <div class="btns">
+        <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
+        <Btn href="/courses" ghost>Browse Self-paced Courses</Btn>
+      </div>
+    </div>
+  </section>
+
+  <LogoBand />
 
   <Section id="learn">
+    <Head
+      eyebrow="Oracle Cloud ERP learning"
+      title="Everything you need| to become project-ready."
+      lead="Pick the format that fits where you are: a guided cohort, courses at your own pace, the app in your pocket, or eCampus at your college."
+    />
     <div class="grid c4">
       <Card
         title="Cohorts" icon="users" num="01" href="/upcoming-cohorts"
@@ -59,8 +84,10 @@ import { APP, ECAMPUS, LOGIN } from "../lib/site";
           "**Check your understanding** with quizzes that explain every answer",
           "**Find work** through Oracle consulting openings from SIs and consulting firms",
         ]} />
-        {/* TODO: Play Store and App Store buttons once the links arrive. */}
-        <p class="muted mt-4">Play Store and App Store links coming soon.</p>
+        <div class="stores">
+          <a href={PLAY_STORE} target="_blank" rel="noopener"><Image src={googlePlay} alt="Get it on Google Play" height={48} /></a>
+          <a href={APP_STORE} target="_blank" rel="noopener"><Image src={appStore} alt="Download on the App Store" height={48} /></a>
+        </div>
       </div>
       <div class="app-shots">
         <Image src={quiz} alt="YECC app quiz showing the correct answer with an explanation" widths={[260, 520]} sizes="260px" />
@@ -68,4 +95,9 @@ import { APP, ECAMPUS, LOGIN } from "../lib/site";
       </div>
     </div>
   </Section>
+
+  <Cta eyebrow="Ready to start?" title="Join the next cohort and build a career in Oracle Cloud ERP consulting.">
+    <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
+    <Btn href={LOGIN} ghost>Sign in</Btn>
+  </Cta>
 </Layout>

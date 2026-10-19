@@ -1,0 +1,39 @@
+---
+// Navy strip of client and partner logos, sliding sideways in a loop.
+import fusion from "../assets/fusion-practices-clean.png";
+import version1 from "../assets/version1-logo-dark.svg?url";
+import emicon from "../assets/emicon-logo.png";
+import conneqtion from "../assets/conneqtion-logo.png";
+import mastek from "../assets/mastek-logo.png";
+import ibm from "../assets/ibm-logo.svg?url";
+import kis from "../assets/kis-logo.png";
+import deloitte from "../assets/deloitte-logo.png";
+import inspirext from "../assets/inspirext-logo.png";
+import orbrick from "../assets/orbrick-logo.png";
+
+const logos = [
+  { src: fusion.src, name: "Fusion Practices" },
+  { src: version1, name: "Version 1" },
+  { src: emicon.src, name: "Emicon" },
+  { src: conneqtion.src, name: "Conneqtion" },
+  { src: mastek.src, name: "Mastek" },
+  { src: ibm, name: "IBM" },
+  { src: kis.src, name: "Knowledge Integrated Smart Labs" },
+  { src: deloitte.src, name: "Deloitte" },
+  { src: inspirext.src, name: "InspireXT" },
+  { src: orbrick.src, name: "Orbrick" },
+];
+const { id } = Astro.props as { id?: string };
+---
+<section class="band" id={id}>
+  <div class="wrap">
+    <p>Powered user enablement / resourcing / consulting training / placements at</p>
+    <div class="marquee">
+      {/* The track is doubled so the -50% slide loops seamlessly; the copy is hidden from assistive tech. */}
+      <div class="marquee-track">
+        {logos.map((l) => <img src={l.src} alt={`${l.name} logo`} loading="lazy" />)}
+        {logos.map((l) => <img src={l.src} alt="" aria-hidden="true" loading="lazy" />)}
+      </div>
+    </div>
+  </div>
+</section>

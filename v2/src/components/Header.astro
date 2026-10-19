@@ -3,9 +3,10 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import Btn from "./Btn.astro";
 import logo from "../assets/logo.png";
-import { NAV, CONSULTANT_NAV, CONSULTANT_PATHS, LOGIN, APP, to, isExternal } from "../lib/site";
+import { NAV, CONSULTANT_NAV, CONSULTANT_PATHS, LOGIN, to, isExternal } from "../lib/site";
 const { path } = Astro.props as { path: string };
-const current = (href: string) => href.split("#")[0] === path;
+// A link to a section of a page (#...) is not the page itself, so it never shows as current.
+const current = (href: string) => !href.includes("#") && href === path;
 // Each audience gets its own menu, plus a plain link across to the other audience's landing page.
 const consultant = CONSULTANT_PATHS.includes(path);
 const nav = consultant ? CONSULTANT_NAV : NAV;
@@ -43,7 +44,6 @@ const other = consultant ? { label: "YECC for SIs", href: "/" } : { label: "YECC
       </nav>
       <div class="header-cta">
         <a class="audience" href={to(other.href)}>{other.label}</a>
-        <Btn href={APP} ghost>Get the App<Icon name="go" /></Btn>
         <Btn href={LOGIN}>Sign in</Btn>
       </div>
     </div>
