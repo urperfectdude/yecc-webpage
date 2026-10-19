@@ -190,6 +190,22 @@
   .hero-home h1 { max-width: 16em; margin-inline: auto; text-wrap: balance; }
   .hero-home .lead { margin-inline: auto; max-width: 44ch; }
   .hero-home .btns { justify-content: center; }
+  /* Consultant side: same layout as the home hero, flipped to brand blue so the two audiences read apart */
+  .hero-alt {
+    color: rgba(255, 255, 255, 0.85);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 1.5px, transparent 1.6px) 0 0 / 28px 28px, linear-gradient(160deg, var(--color-blue), #1a4e9f);
+    border-bottom: 0;
+  }
+  .hero-alt h1, .hero-alt .tiles-title { color: var(--color-white); }
+  .hero-alt .tone { color: rgba(255, 255, 255, 0.62); }
+  .hero-alt .eyebrow { color: rgba(255, 255, 255, 0.85); }
+  .hero-alt .eyebrow::before { background: var(--color-white); }
+  .hero-alt .tiles a { background: var(--color-white); box-shadow: 0 16px 32px -24px rgba(5, 15, 32, 0.6); }
+  .hero-alt .tiles a:hover { border-color: var(--color-white); background: var(--color-tint-2); }
+  .hero-alt .btn { background: var(--color-white); color: var(--color-ink); border-color: var(--color-white); }
+  .hero-alt .btn:hover { background: var(--color-tint-2); border-color: var(--color-tint-2); }
+  .hero-alt .btn.ghost { background: transparent; color: var(--color-white); border-color: rgba(255, 255, 255, 0.8); }
+  .hero-alt .btn.ghost:hover { background: var(--color-white); color: var(--color-ink); }
   .tiles-title { margin: clamp(40px, 6vw, 72px) 0 1rem; font-size: 1.25rem; color: var(--color-ink); }
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .tiles a {
