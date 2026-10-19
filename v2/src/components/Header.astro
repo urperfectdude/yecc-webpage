@@ -3,9 +3,13 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import Btn from "./Btn.astro";
 import logo from "../assets/logo.png";
-import { NAV, LOGIN, to } from "../lib/site";
+import { NAV, CONSULTANT_NAV, CONSULTANT_PATHS, LOGIN, APP, to, isExternal } from "../lib/site";
 const { path } = Astro.props as { path: string };
 const current = (href: string) => href.split("#")[0] === path;
+// Each audience gets its own menu, plus a plain link across to the other audience's landing page.
+const consultant = CONSULTANT_PATHS.includes(path);
+const nav = consultant ? CONSULTANT_NAV : NAV;
+const other = consultant ? { label: "YECC for SIs", href: "/" } : { label: "YECC for Oracle Consultants", href: "/consultants" };
 ---
 <header class="header">
   <div class="wrap">
@@ -18,7 +22,7 @@ const current = (href: string) => href.split("#")[0] === path;
     </button>
     <div class="header-panel">
       <nav class="nav" aria-label="Main">
-        {NAV.map((item) =>
+        {nav.map((item) =>
           item.children ? (
             <div class="nav-item">
               <button type="button" aria-expanded="false" class:list={{ current: item.children.some((c) => current(c.href)) }}>
@@ -33,13 +37,14 @@ const current = (href: string) => href.split("#")[0] === path;
               </div>
             </div>
           ) : (
-            <a href={to(item.href)} class:list={{ current: current(item.href) }} aria-current={current(item.href) ? "page" : undefined}>{item.label}</a>
+            <a href={to(item.href)} class:list={{ current: current(item.href) }} aria-current={current(item.href) ? "page" : undefined} {...(isExternal(item.href) ? { target: "_blank", rel: "noopener" } : {})}>{item.label}</a>
           )
         )}
       </nav>
       <div class="header-cta">
-        <Btn href={LOGIN} ghost>Consultant Login</Btn>
-        <Btn href="/partnerships">Explore SI Partnership</Btn>
+        <a class="audience" href={to(other.href)}>{other.label}</a>
+        <Btn href={APP} ghost>Get the App<Icon name="go" /></Btn>
+        <Btn href={LOGIN}>Sign in</Btn>
       </div>
     </div>
   </div>

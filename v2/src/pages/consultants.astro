@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Head from "../components/Head.astro";
+import Checks from "../components/Checks.astro";
+import { Image } from "astro:assets";
+import quiz from "../assets/app/quiz.png";
+import jobs from "../assets/app/jobs.png";
+import { APP, ECAMPUS, LOGIN } from "../lib/site";
+---
+<Layout
+  path="/consultants"
+  title="Oracle Cloud ERP Training for Consultants | YECC"
+  description="Fresher training cohorts, self-paced Oracle Cloud ERP courses, the YECC mobile app, and eCampus for Oracle consultants and aspiring consultants."
+>
+  <Hero
+    eyebrow="YECC for Oracle Consultants"
+    title="Start or grow your| Oracle Cloud ERP consulting career."
+    lead="Live cohorts, self-paced courses, and learning on the go, built by Oracle consultants who train SI teams."
+  >
+    <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
+    <Btn href={LOGIN} ghost>Sign in</Btn>
+  </Hero>
+
+  <Section id="learn">
+    <div class="grid c4">
+      <Card
+        title="Cohorts" icon="users" num="01" href="/upcoming-cohorts"
+        text="Eight-week fresher training cohorts with expert-led sessions, Oracle demo-system access, and interview preparation."
+      />
+      <Card
+        title="Self-paced Courses" icon="video" num="02" href="/courses"
+        text="ERP fundamentals, business processes, and Oracle Cloud ERP functional modules, at your own pace."
+      />
+      <Card
+        title="Mobile App" icon="app" num="03" href={APP}
+        text="Upskill with courses and quizzes, and browse Oracle job openings, all on your phone."
+      />
+      <Card
+        title="eCampus" icon="cap" num="04" href={ECAMPUS}
+        text="YECC’s extended college campus: ERP basics, certification, and visibility with recruiters for graduates getting ready for placements."
+      />
+    </div>
+  </Section>
+
+  <Section id="get-the-app" class="bg-tint">
+    <div class="split">
+      <div>
+        <Head
+          eyebrow="YECC mobile app"
+          title="Learn, practise, and find| Oracle roles on the go."
+          lead="The YourERPCoach app keeps your learning and your next career move in one place."
+        />
+        <Checks items={[
+          "**Upskill** with your courses and process videos",
+          "**Check your understanding** with quizzes that explain every answer",
+          "**Find work** through Oracle consulting openings from SIs and consulting firms",
+        ]} />
+        {/* TODO: Play Store and App Store buttons once the links arrive. */}
+        <p class="muted mt-4">Play Store and App Store links coming soon.</p>
+      </div>
+      <div class="app-shots">
+        <Image src={quiz} alt="YECC app quiz showing the correct answer with an explanation" widths={[260, 520]} sizes="260px" />
+        <Image src={jobs} alt="YECC app listing Oracle consulting job openings" widths={[260, 520]} sizes="260px" />
+      </div>
+    </div>
+  </Section>
+</Layout>

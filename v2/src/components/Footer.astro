@@ -2,19 +2,18 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import logo from "../assets/logo.png";
-import soc from "../assets/badge-aicpa-soc.svg?url";
-import hipaa from "../assets/badge-hipaa.svg?url";
-import ikeepsafe from "../assets/badge-ikeepsafe.svg?url";
+import soc2 from "../assets/badge-soc2.svg?url";
+import gdpr from "../assets/badge-gdpr.svg?url";
 import { SOCIAL, TAGLINE, EMAIL, PHONE, to } from "../lib/site";
 const badges = [
-  { src: soc, alt: "AICPA SOC" },
-  { src: hipaa, alt: "HIPAA Compliant" },
-  { src: ikeepsafe, alt: "iKeepSafe" },
+  { src: soc2, alt: "SOC 2 Type II" },
+  { src: gdpr, alt: "GDPR" },
 ];
 const solutions = [
-  ["SI Partnerships", "/partnerships"],
+  ["YECC for SIs", "/partnerships"],
   ["SHERPA", "/sherpa"],
-  ["Corporate Training", "/talent-pathways#corporate-fresher-training"],
+  ["Corporate Fresher Consulting Training", "/talent-pathways#corporate-fresher-training"],
+  ["YECC for Oracle Consultants", "/consultants"],
 ];
 const company = [
   ["About", "/about"],
@@ -27,7 +26,9 @@ const company = [
     <div>
       <a class="logo" href={to("/")} aria-label="YourERPCoach.com home"><Image src={logo} alt="YourERPCoach.Com" width={470} /></a>
       <p class="about">{TAGLINE}</p>
-      <div class="badges">{badges.map((b) => <img src={b.src} alt={b.alt} width="58" height="58" loading="lazy" />)}</div>
+      <div class="badges">
+        {badges.map((b) => <figure><img src={b.src} alt={b.alt} width="58" height="58" loading="lazy" /><figcaption>In Process</figcaption></figure>)}
+      </div>
     </div>
     <div>
       <h4>Solutions</h4>

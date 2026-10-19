@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="SOC 2 Type II">
+  <circle cx="60" cy="60" r="56" fill="#fff" stroke="#2B72D9" stroke-width="5"/>
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#2B72D9" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <text x="60" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="26" fill="#2B72D9">SOC 2</text>
+  <text x="60" y="82" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="14" letter-spacing="1" fill="#E53935">TYPE II</text>
+</svg>

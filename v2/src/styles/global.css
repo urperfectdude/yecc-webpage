@@ -135,6 +135,10 @@
   .nav-item:hover button svg, .nav-item.open button svg { transform: rotate(180deg); }
   .header-cta { display: flex; align-items: center; gap: 0.5rem; flex: none; }
   .header-cta .btn { min-height: 40px; padding: 0.4rem 1rem; font-size: 0.9rem; }
+  .header-cta .btn svg { width: 14px; height: 14px; }
+  /* Link across to the other audience: plain text with an underline, like a section switch */
+  .audience { margin-right: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-blue); text-decoration-thickness: 2px; text-underline-offset: 6px; white-space: nowrap; }
+  .audience:hover { color: var(--color-blue); }
   .menu-btn { display: none; margin-left: auto; width: 44px; height: 44px; padding: 10px; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-white); color: var(--color-ink); cursor: pointer; }
   .menu-btn svg { width: 22px; height: 22px; display: block; }
   .menu-btn .x, .menu-open .menu-btn .bars { display: none; }
@@ -162,6 +166,7 @@
     .dropdown-label { padding-inline: 0.25rem; }
     .header-cta { flex-direction: column; align-items: stretch; margin-top: 1rem; }
     .header-cta .btn { min-height: 46px; }
+    .header-cta .audience { order: -1; margin: 0 0 0.5rem; padding: 0.6rem 0.25rem; }
   }
   @media (min-width: 1200px) { .header-panel { display: contents; } }
   @media (max-width: 420px) { .logo img { height: 20px; } }
@@ -276,6 +281,9 @@
   /* Wide banner whose subject sits on the right: frame that side so the learner is shown whole */
   .split img.banner { aspect-ratio: 3 / 2; object-position: right center; }
   /* Square course artwork: shown whole, never cropped */
+  /* Phone mockups side by side; the screenshots stop mid-phone, so their bottoms fade out */
+  .app-shots { display: flex; justify-content: center; align-items: flex-end; gap: clamp(12px, 3vw, 28px); -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+  .split .app-shots img { width: calc(50% - 14px); max-width: 260px; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 0; }
   .split img.thumb { max-width: 440px; aspect-ratio: 1 / 1; object-fit: contain; justify-self: center; border: 1px solid var(--color-line); }
 
   /* Accordion feature (dark) */
@@ -305,21 +313,9 @@
   .progress i.on::before { transform: scaleX(var(--p, 0)); }
   .mock { display: none; background: var(--color-white); border-radius: 14px; overflow: hidden; color: var(--color-ink); box-shadow: 0 24px 48px -24px rgba(5, 15, 32, 0.6); }
   .mock.on { display: block; }
-  .mock-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-line); font-size: 0.82rem; font-weight: 600; }
-  .mock-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-line); }
-  .mock-bar i:first-child { background: var(--color-red); }
-  .mock-bar span { margin-left: 0.4rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .mock-body { display: grid; gap: 0.7rem; padding: 1.1rem; min-height: 250px; align-content: start; }
-  .mock-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.75rem; align-items: center; padding: 0.7rem 0.8rem; border: 1px solid var(--color-line); border-radius: 10px; font-size: 0.88rem; font-weight: 500; }
-  .mock-row b { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 7px; background: var(--color-tint-2); color: var(--color-blue); font-size: 0.78rem; }
-  .mock-row span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .mock-row em { font-style: normal; font-size: 0.74rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 999px; background: var(--color-tint-2); color: var(--color-blue); white-space: nowrap; }
-  .mock-row em.r { background: #fdebea; color: var(--color-red); }
-  .mock-video { position: relative; aspect-ratio: 16 / 8; border-radius: 10px; background: var(--color-navy); display: grid; place-items: center; }
-  .mock-video::before { content: ""; width: 52px; height: 52px; border-radius: 50%; background: var(--color-white); }
-  .mock-video::after { content: ""; position: absolute; border-left: 16px solid var(--color-red); border-block: 10px solid transparent; transform: translateX(3px); }
-  .mock-line { height: 6px; border-radius: 3px; background: var(--color-tint-2); overflow: hidden; }
-  .mock-line::before { content: ""; display: block; width: 42%; height: 100%; background: var(--color-blue); }
+  /* Real SHERPA screenshots, shown whole inside one shared frame shape so the panel does not jump between tabs */
+  .mock.shot { background: var(--color-white); }
+  .split .mock.shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: contain; border-radius: 0; }
 
   /* Testimonials */
   .quote { display: flex; flex-direction: column; gap: 1.4rem; padding: clamp(22px, 3vw, 32px); border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-white); }
@@ -574,8 +570,10 @@
   .footer-grid > * { min-width: 0; }
   .footer .logo img { height: 26px; }
   .footer .about { margin: 1rem 0 0; max-width: 36ch; }
-  .badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.4rem; }
+  .badges { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 1.4rem; }
+  .badges figure { margin: 0; display: grid; justify-items: center; gap: 0.3rem; }
   .badges img { width: 58px; height: 58px; }
+  .badges figcaption { font-size: 0.7rem; font-weight: 500; color: var(--color-soft); }
   .footer h4 { margin-bottom: 0.9rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-soft); }
   .footer li + li { margin-top: 0.55rem; }
   .footer a:hover { color: var(--color-blue); }

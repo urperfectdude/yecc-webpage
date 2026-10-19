@@ -21,29 +21,34 @@ export const isExternal = (href: string) => /^https?:/.test(href);
 
 export type NavItem = { label: string; href: string; children?: { label: string; href: string; group?: string }[] };
 
+export const APP = "/consultants#get-the-app";
+export const ECAMPUS = "https://ecampus.yourerpcoach.com";
+
+// The site has two audiences, each with its own menu. The header shows a plain link across to the other one.
 export const NAV: NavItem[] = [
-  { label: "Home", href: "/" },
   {
-    label: "SI Partnerships",
+    label: "YECC for SIs",
     href: "/partnerships",
     children: [
       { label: "Overview", href: "/partnerships" },
       { label: "EUT-as-a-Service", href: "/partnerships#implementation-enablement" },
       { label: "Documentation-as-a-Service", href: "/partnerships#ams-enablement" },
-      { label: "Resource Augmentation Service", href: "/partnerships#daas" },
+      { label: "Resource Augmentation", href: "/partnerships#daas" },
+      { label: "Corporate Fresher Consulting Training", href: "/talent-pathways#corporate-fresher-training" },
     ],
   },
   { label: "SHERPA", href: "/sherpa" },
-  {
-    label: "Consulting Training",
-    href: "/talent-pathways",
-    children: [
-      { label: "Corporate Fresher Training", href: "/talent-pathways#corporate-fresher-training", group: "FOR SIs" },
-      { label: "Self-paced Courses", href: "/courses", group: "FOR FRESHERS AND DOMAIN EXPERTS" },
-      { label: "Fresher Training Cohorts", href: "/upcoming-cohorts", group: "FOR FRESHERS AND DOMAIN EXPERTS" },
-    ],
-  },
 ];
+
+export const CONSULTANT_NAV: NavItem[] = [
+  { label: "Cohorts", href: "/upcoming-cohorts" },
+  { label: "Self-paced Courses", href: "/courses" },
+  { label: "Mobile App", href: APP },
+  { label: "eCampus", href: ECAMPUS },
+];
+
+/** Pages that belong to the Oracle consultants side of the site. */
+export const CONSULTANT_PATHS = ["/consultants", "/courses", "/upcoming-cohorts"];
 
 export const SOCIAL = [
   { icon: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/yourerpcoach" },

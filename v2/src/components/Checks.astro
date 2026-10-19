@@ -2,4 +2,5 @@
 import Icon from "./Icon.astro";
 const { items, class: cls = "checks" } = Astro.props as { items: string[]; class?: string };
 ---
-<ul class={cls}>{items.map((item) => <li><Icon name="check" /><span>{item}</span></li>)}</ul>
+{/* Text between **double asterisks** is shown in bold. */}
+<ul class={cls}>{items.map((item) => <li><Icon name="check" /><span>{item.split("**").map((part, i) => (i % 2 ? <strong>{part}</strong> : part))}</span></li>)}</ul>
