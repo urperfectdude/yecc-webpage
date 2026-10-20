@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import Btn from "./Btn.astro";
 import logo from "../assets/logo.png";
-import { NAV, CONSULTANT_NAV, CONSULTANT_PATHS, LOGIN, to, isExternal } from "../lib/site";
+import { NAV, CONSULTANT_NAV, CONSULTANT_PATHS, LANDING_PATHS, LOGIN, FORM, to, isExternal } from "../lib/site";
 const { path } = Astro.props as { path: string };
 // A link to a section of a page (#...) is not the page itself, so it never shows as current.
 const current = (href: string) => !href.includes("#") && href === path;
@@ -12,7 +12,7 @@ const consultant = CONSULTANT_PATHS.includes(path);
 const nav = consultant ? CONSULTANT_NAV : NAV;
 const other = consultant ? { label: "YECC for SIs", href: "/" } : { label: "YECC for Oracle Consultants", href: "/consultants" };
 ---
-<header class="header">
+<header class="header" data-landing={LANDING_PATHS.includes(path) ? "" : undefined}>
   <div class="wrap">
     <a class="logo" href={to("/")} aria-label="YourERPCoach.com home">
       <Image src={logo} alt="YourERPCoach.Com" width={434} loading="eager" />
@@ -44,7 +44,8 @@ const other = consultant ? { label: "YECC for SIs", href: "/" } : { label: "YECC
       </nav>
       <div class="header-cta">
         <a class="audience" href={to(other.href)}>{other.label}</a>
-        <Btn href={LOGIN}>Sign in</Btn>
+        {/* SIs are sent to the discussion form; consultants sign in to their courses. */}
+        {consultant ? <Btn href={LOGIN}>Sign in</Btn> : <Btn href={FORM}>Explore Partnership</Btn>}
       </div>
     </div>
   </div>

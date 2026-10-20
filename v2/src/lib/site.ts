@@ -28,17 +28,10 @@ export const ECAMPUS = "https://ecampus.yourerpcoach.com";
 
 // The site has two audiences, each with its own menu. The header shows a plain link across to the other one.
 export const NAV: NavItem[] = [
-  {
-    label: "YECC for SIs",
-    href: "/partnerships",
-    children: [
-      { label: "Overview", href: "/partnerships" },
-      { label: "EUT-as-a-Service", href: "/partnerships#implementation-enablement" },
-      { label: "Documentation-as-a-Service", href: "/partnerships#ams-enablement" },
-      { label: "Resource Augmentation", href: "/partnerships#daas" },
-      { label: "Corporate Fresher Consulting Training", href: "/talent-pathways#corporate-fresher-training" },
-    ],
-  },
+  { label: "EUTaaS", href: "/partnerships#implementation-enablement" },
+  { label: "DaaS", href: "/partnerships#ams-enablement" },
+  { label: "Resource Augmentation", href: "/partnerships#daas" },
+  { label: "Consulting Training", href: "/talent-pathways#corporate-fresher-training" },
   { label: "SHERPA", href: "/sherpa" },
 ];
 
@@ -48,6 +41,9 @@ export const CONSULTANT_NAV: NavItem[] = [
   { label: "Mobile App", href: APP },
   { label: "eCampus", href: ECAMPUS },
 ];
+
+/** Landing pages whose hero tiles already list the menu, so the menu only shows once the hero is scrolled past. */
+export const LANDING_PATHS = ["/", "/consultants"];
 
 /** Pages that belong to the Oracle consultants side of the site. */
 export const CONSULTANT_PATHS = ["/consultants", "/courses", "/upcoming-cohorts"];

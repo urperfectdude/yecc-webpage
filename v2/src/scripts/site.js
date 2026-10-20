@@ -16,6 +16,16 @@ document.addEventListener("click", (e) => {
   if (e.target.closest(".header-panel a")) header.classList.remove("menu-open");
 });
 
+// Landing pages: the hero tiles already list the menu, so the header menu fades in only once the hero is out of view
+const landingHero = header.hasAttribute("data-landing") && document.querySelector(".hero-home");
+if (landingHero && "IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => header.classList.toggle("past-hero", !e.isIntersecting), {
+    rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
+  }).observe(landingHero);
+} else {
+  header.classList.add("past-hero");
+}
+
 // Accordion feature: one item open at a time, matching visual on the stage.
 // The progress bar under the stage shows the time left before the next tab opens. It waits while the
 // pointer or keyboard focus is on the section, and stops for good once the visitor picks a tab.
