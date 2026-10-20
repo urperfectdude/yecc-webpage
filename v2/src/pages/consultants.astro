@@ -9,8 +9,7 @@ import Card from "../components/Card.astro";
 import Head from "../components/Head.astro";
 import Checks from "../components/Checks.astro";
 import { Image } from "astro:assets";
-import quiz from "../assets/app/quiz.png";
-import jobs from "../assets/app/jobs.png";
+import appScreens from "../assets/app/app-screens.png";
 import googlePlay from "../assets/app/google-play.png";
 import appStore from "../assets/app/app-store.png";
 import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, to, isExternal } from "../lib/site";
@@ -89,10 +88,7 @@ const tiles = [
           <a href={APP_STORE} target="_blank" rel="noopener"><Image src={appStore} alt="Download on the App Store" height={48} /></a>
         </div>
       </div>
-      <div class="app-shots">
-        <Image src={quiz} alt="YECC app quiz showing the correct answer with an explanation" widths={[260, 520]} sizes="260px" />
-        <Image src={jobs} alt="YECC app listing Oracle consulting job openings" widths={[260, 520]} sizes="260px" />
-      </div>
+      <Image class="app-shots" src={appScreens} alt="YECC app screens: Oracle job openings, a quiz with its explanation, and process video courses" widths={[560, 840, 1120]} sizes="(min-width: 960px) 560px, 100vw" />
     </div>
   </Section>
 

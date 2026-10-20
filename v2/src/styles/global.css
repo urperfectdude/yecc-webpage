@@ -194,6 +194,8 @@
   .hero-home h1 { max-width: 16em; margin-inline: auto; text-wrap: balance; }
   .hero-home .lead { margin-inline: auto; max-width: 44ch; }
   .hero-home .btns { justify-content: center; }
+  /* On phones the hero buttons stack; one shared column makes them all as wide as the widest */
+  @media (max-width: 600px) { .hero-home .btns { display: grid; grid-template-columns: minmax(0, max-content); } }
   /* Consultant side: same layout as the home hero, flipped to brand blue so the two audiences read apart */
   .hero-alt {
     color: rgba(255, 255, 255, 0.85);
@@ -303,9 +305,8 @@
   /* Wide banner whose subject sits on the right: frame that side so the learner is shown whole */
   .split img.banner { aspect-ratio: 3 / 2; object-position: right center; }
   /* Square course artwork: shown whole, never cropped */
-  /* Phone mockups side by side; the screenshots stop mid-phone, so their bottoms fade out */
-  .app-shots { display: flex; justify-content: center; align-items: flex-end; gap: clamp(12px, 3vw, 28px); -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
-  .split .app-shots img { width: calc(50% - 14px); max-width: 260px; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 0; }
+  /* App screens composite: shown whole, never cropped */
+  .split img.app-shots { width: 100%; max-width: 560px; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 0; justify-self: center; }
   .stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.8rem; }
   .split .stores img { width: auto; height: 48px; aspect-ratio: auto; border-radius: 0; }
   .split img.thumb { max-width: 440px; aspect-ratio: 1 / 1; object-fit: contain; justify-self: center; border: 1px solid var(--color-line); }
