@@ -13,6 +13,7 @@ const tiles = [
   { icon: "layers", label: "EUT-as-a-Service", href: "/partnerships#implementation-enablement" },
   { icon: "file", label: "Documentation-as-a-Service", href: "/partnerships#ams-enablement" },
   { icon: "users", label: "Oracle Resource Augmentation", href: "/partnerships#daas" },
+  { icon: "cap", label: "Consulting Training", href: "/talent-pathways#corporate-fresher-training" },
   { icon: "monitor", label: "SHERPA platform", href: "/sherpa" },
 ];
 ---
@@ -27,7 +28,7 @@ const tiles = [
       <h1>You implement Oracle.<span class="tone"> We get the users ready.</span></h1>
       <p class="lead">Role-based manuals, process videos, and key-user and end-user training for Oracle Fusion programmes, powered by SHERPA.</p>
       <p class="serif tiles-title">How can YECC help?</p>
-      <div class="tiles">
+      <div class="tiles c5">
         {tiles.map((t) => <a href={to(t.href)}><Icon name={t.icon} /><span>{t.label}</span></a>)}
       </div>
       <div class="btns">
