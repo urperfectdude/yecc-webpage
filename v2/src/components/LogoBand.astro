@@ -23,11 +23,11 @@ const logos = [
   { src: inspirext.src, name: "InspireXT" },
   { src: orbrick.src, name: "Orbrick" },
 ];
-const { id } = Astro.props as { id?: string };
+const { id, label = "Powered user enablement / resourcing / consulting training / placements at" } = Astro.props as { id?: string; label?: string };
 ---
 <section class="band" id={id}>
   <div class="wrap">
-    <p>Powered user enablement / resourcing / consulting training / placements at</p>
+    <p>{label}</p>
     <div class="marquee">
       {/* The track is doubled so the -50% slide loops seamlessly; the copy is hidden from assistive tech. */}
       <div class="marquee-track">

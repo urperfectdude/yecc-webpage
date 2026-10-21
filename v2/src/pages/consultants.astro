@@ -14,10 +14,15 @@ import googlePlay from "../assets/app/google-play.png";
 import appStore from "../assets/app/app-store.png";
 import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, to, isExternal } from "../lib/site";
 const tiles = [
-  { icon: "users", label: "Fresher Training Cohorts", href: "/upcoming-cohorts" },
-  { icon: "video", label: "Self-paced Courses", href: "/courses" },
-  { icon: "app", label: "Mobile App", href: APP },
-  { icon: "cap", label: "eCampus", href: ECAMPUS },
+  { icon: "users", label: "Fresher Training Cohorts", note: "for Fresher Grads and Domain Experts", href: "/upcoming-cohorts" },
+  { icon: "video", label: "Self-paced Courses", note: "for Oracle Consultants looking for upskilling & cross-skilling", href: "/courses" },
+  { icon: "app", label: "YECC Mobile App", note: "for Oracle Consultants looking for upskilling & work opportunities", href: APP },
+  { icon: "cap", label: "eCampus", note: "for colleges and universities", href: ECAMPUS },
+];
+const figures = [
+  { value: "150+", label: "learners trained" },
+  { value: "50+", label: "placed in Oracle Consulting roles" },
+  { value: "INR 6.5 Lakhs", label: "Average Starting Salary" },
 ];
 ---
 <Layout
@@ -28,12 +33,12 @@ const tiles = [
   {/* Same layout as the home page hero, aimed at consultants instead of SIs, in blue so the two sides read apart. */}
   <section class="hero hero-home hero-alt">
     <div class="wrap">
-      <p class="eyebrow">YECC for Oracle Consultants</p>
-      <h1>Start your Oracle career.<span class="tone"> Grow it with YECC.</span></h1>
-      <p class="lead">Live cohorts, self-paced courses, and learning on the go, built by Oracle consultants who train SI teams.</p>
+      <p class="eyebrow">Oracle Cloud ERP consulting training for freshers, domain experts and Oracle Consultants</p>
+      <h1>Learn Oracle the way<span class="tone"> Consulting Companies train their own consultants</span></h1>
+      <p class="lead">YECC trains fresher batches for Oracle Consulting Companies. Our independent fresher training cohorts give you the same project-ready training, placement assistance and the access to Oracle job openings.</p>
       <p class="serif tiles-title">How can YECC help you?</p>
       <div class="tiles">
-        {tiles.map((t) => <a href={to(t.href)} {...(isExternal(t.href) ? { target: "_blank", rel: "noopener" } : {})}><Icon name={t.icon} /><span>{t.label}</span></a>)}
+        {tiles.map((t) => <a href={to(t.href)} {...(isExternal(t.href) ? { target: "_blank", rel: "noopener" } : {})}><Icon name={t.icon} /><span>{t.label}</span><small>{t.note}</small></a>)}
       </div>
       <div class="btns">
         <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
@@ -42,7 +47,15 @@ const tiles = [
     </div>
   </section>
 
-  <LogoBand />
+  <LogoBand label="YECC learners now work at" />
+
+  <section class="figures" aria-label="YECC learner outcomes">
+    <div class="wrap">
+      <dl>
+        {figures.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
 
   <Section id="learn">
     <Head
