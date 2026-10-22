@@ -285,6 +285,8 @@
   .icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--color-tint-2); color: var(--color-blue); flex: none; }
   .icon svg { width: 22px; height: 22px; }
   .card .link, .card .btn { margin-top: auto; align-self: flex-start; }
+  .card-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: auto; padding-top: 0.5rem; }
+  .card-btns .link, .card-btns .btn { margin-top: 0; align-self: center; }
   .card .checks + .link, .card .checks + .btn { margin-top: auto; }
   .checks { display: grid; gap: 0.55rem; }
   .checks li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 0.6rem; align-items: start; color: var(--color-ink); font-size: 0.97rem; line-height: 1.45; }

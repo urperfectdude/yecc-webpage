@@ -8,17 +8,33 @@ import Section from "../components/Section.astro";
 import Card from "../components/Card.astro";
 import Head from "../components/Head.astro";
 import Checks from "../components/Checks.astro";
+import TextLink from "../components/TextLink.astro";
+import cohortData from "../data/cohorts.json";
 import { Image } from "astro:assets";
 import appScreens from "../assets/app/app-screens.png";
 import googlePlay from "../assets/app/google-play.png";
 import appStore from "../assets/app/app-store.png";
-import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, to, isExternal } from "../lib/site";
+import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, COHORT_FORM, to, isExternal } from "../lib/site";
 const tiles = [
   { icon: "users", label: "Fresher Training Cohorts", note: "for Fresher Grads and Domain Experts", href: "/upcoming-cohorts" },
   { icon: "video", label: "Self-paced Courses", note: "for Oracle Consultants looking for upskilling & cross-skilling", href: "/courses" },
   { icon: "app", label: "YECC Mobile App", note: "for Oracle Consultants looking for upskilling & work opportunities", href: APP },
   { icon: "cap", label: "eCampus", note: "for colleges and universities", href: ECAMPUS },
 ];
+const names: Record<string, [string, string]> = {
+  "oracle-hcm": ["Oracle Cloud HCM", "users"],
+  "oracle-financials": ["Oracle Cloud Financials", "layers"],
+  "oracle-scm": ["Oracle Cloud Supply Chain", "refresh"],
+};
+const fact = (c: (typeof cohortData)[number], key: string) => c.details.facts.find((f) => f[0] === key)?.[1] ?? "";
+const cohorts = cohortData.map((c) => ({
+  slug: c.slug,
+  name: names[c.slug]?.[0] ?? c.code,
+  icon: names[c.slug]?.[1] ?? "cap",
+  lead: c.lead,
+  highlights: c.highlights,
+  tags: [`Starts ${c.month}`, fact(c, "Course duration"), fact(c, "Course fee")].filter(Boolean),
+}));
 const figures = [
   { value: "150+", label: "learners trained" },
   { value: "50+", label: "placed in Oracle Consulting roles" },
@@ -57,29 +73,21 @@ const figures = [
     </div>
   </section>
 
-  <Section id="learn">
+  <Section id="upcoming-cohorts">
     <Head
-      eyebrow="Oracle Cloud ERP learning"
-      title="Everything you need| to become project-ready."
-      lead="Pick the format that fits where you are: a guided cohort, courses at your own pace, the app in your pocket, or eCampus at your college."
+      eyebrow="Upcoming cohorts"
+      title="Pick your Oracle path.| Join the next batch."
+      lead="Live fresher training cohorts in Oracle Cloud Human Capital, Financials, and Supply Chain."
     />
-    <div class="grid c4">
-      <Card
-        title="Cohorts" icon="users" num="01" href="/upcoming-cohorts"
-        text="Eight-week fresher training cohorts with expert-led sessions, Oracle demo-system access, and interview preparation."
-      />
-      <Card
-        title="Self-paced Courses" icon="video" num="02" href="/courses"
-        text="ERP fundamentals, business processes, and Oracle Cloud ERP functional modules, at your own pace."
-      />
-      <Card
-        title="Mobile App" icon="app" num="03" href={APP}
-        text="Upskill with courses and quizzes, and browse Oracle job openings, all on your phone."
-      />
-      <Card
-        title="eCampus" icon="cap" num="04" href={ECAMPUS}
-        text="YECC’s extended college campus: ERP basics, certification, and visibility with recruiters for graduates getting ready for placements."
-      />
+    <div class="grid c3">
+      {cohorts.map((c) => (
+        <Card icon={c.icon} title={c.name} text={c.lead} tags={c.tags} bullets={c.highlights}>
+          <div class="card-btns">
+            <Btn href={COHORT_FORM}>Request Registration</Btn>
+            <TextLink href={`/upcoming-cohorts/${c.slug}`}>View Details</TextLink>
+          </div>
+        </Card>
+      ))}
     </div>
   </Section>
 
