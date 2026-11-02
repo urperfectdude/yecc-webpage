@@ -1,0 +1,120 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import Btn from "../components/Btn.astro";
+import Cta from "../components/Cta.astro";
+import LogoBand from "../components/LogoBand.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Head from "../components/Head.astro";
+import Checks from "../components/Checks.astro";
+import TextLink from "../components/TextLink.astro";
+import cohortData from "../data/cohorts.json";
+import { Image } from "astro:assets";
+import appScreens from "../assets/app/app-screens.png";
+import googlePlay from "../assets/app/google-play.png";
+import appStore from "../assets/app/app-store.png";
+import { APP, APP_STORE, PLAY_STORE, ECAMPUS, LOGIN, COHORT_FORM, to, isExternal } from "../lib/site";
+const tiles = [
+  { icon: "users", label: "Fresher Training Cohorts", note: "for Fresher Grads and Domain Experts", href: "/upcoming-cohorts" },
+  { icon: "video", label: "Self-paced Courses", note: "for Oracle Consultants looking for upskilling & cross-skilling", href: "/courses" },
+  { icon: "app", label: "YECC Mobile App", note: "for Oracle Consultants looking for upskilling & work opportunities", href: APP },
+  { icon: "cap", label: "eCampus", note: "for colleges and universities", href: ECAMPUS },
+];
+const names: Record<string, [string, string]> = {
+  "oracle-hcm": ["Oracle Cloud HCM", "users"],
+  "oracle-financials": ["Oracle Cloud Financials", "layers"],
+  "oracle-scm": ["Oracle Cloud Supply Chain", "refresh"],
+};
+const fact = (c: (typeof cohortData)[number], key: string) => c.details.facts.find((f) => f[0] === key)?.[1] ?? "";
+const cohorts = cohortData.map((c) => ({
+  slug: c.slug,
+  name: names[c.slug]?.[0] ?? c.code,
+  icon: names[c.slug]?.[1] ?? "cap",
+  lead: c.lead,
+  highlights: c.highlights,
+  tags: [`Starts ${c.month}`, fact(c, "Course duration"), fact(c, "Course fee")].filter(Boolean),
+}));
+const figures = [
+  { value: "150+", label: "learners trained" },
+  { value: "50+", label: "placed in Oracle Consulting roles" },
+  { value: "INR 6.5 Lakhs", label: "Average Starting Salary" },
+];
+---
+<Layout
+  path="/consultants"
+  title="Oracle Cloud ERP Training for Consultants | YECC"
+  description="Fresher training cohorts, self-paced Oracle Cloud ERP courses, the YECC mobile app, and eCampus for Oracle consultants and aspiring consultants."
+>
+  {/* Same layout as the home page hero, aimed at consultants instead of SIs, in blue so the two sides read apart. */}
+  <section class="hero hero-home hero-alt">
+    <div class="wrap">
+      <p class="eyebrow">Oracle Cloud ERP consulting training for freshers, domain experts and Oracle Consultants</p>
+      <h1>Learn Oracle the way<span class="tone"> Consulting Companies train their own consultants</span></h1>
+      <p class="lead">YECC trains fresher batches for Oracle Consulting Companies. Our independent fresher training cohorts give you the same project-ready training, placement assistance and the access to Oracle job openings.</p>
+      <p class="serif tiles-title">How can YECC help you?</p>
+      <div class="tiles">
+        {tiles.map((t) => <a href={to(t.href)} {...(isExternal(t.href) ? { target: "_blank", rel: "noopener" } : {})}><Icon name={t.icon} /><span>{t.label}</span><small>{t.note}</small></a>)}
+      </div>
+      <div class="btns">
+        <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
+        <Btn href="/courses" ghost>Browse Self-paced Courses</Btn>
+      </div>
+    </div>
+  </section>
+
+  <LogoBand label="YECC learners now work at" />
+
+  <section class="figures" aria-label="YECC learner outcomes">
+    <div class="wrap">
+      <dl>
+        {figures.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <Section id="upcoming-cohorts">
+    <Head
+      eyebrow="Upcoming cohorts"
+      title="Pick your Oracle path.| Join the next batch."
+      lead="Live fresher training cohorts in Oracle Cloud Human Capital, Financials, and Supply Chain."
+    />
+    <div class="grid c3">
+      {cohorts.map((c) => (
+        <Card icon={c.icon} title={c.name} text={c.lead} tags={c.tags} bullets={c.highlights}>
+          <div class="card-btns">
+            <Btn href={COHORT_FORM}>Request Registration</Btn>
+            <TextLink href={`/upcoming-cohorts/${c.slug}`}>View Details</TextLink>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="get-the-app" class="bg-tint">
+    <div class="split">
+      <div>
+        <Head
+          eyebrow="YECC mobile app"
+          title="Learn, practise, and find| Oracle roles on the go."
+          lead="The YourERPCoach app keeps your learning and your next career move in one place."
+        />
+        <Checks items={[
+          "**Upskill** with your courses and process videos",
+          "**Check your understanding** with quizzes that explain every answer",
+          "**Find work** through Oracle consulting openings from SIs and consulting firms",
+        ]} />
+        <div class="stores">
+          <a href={PLAY_STORE} target="_blank" rel="noopener"><Image src={googlePlay} alt="Get it on Google Play" height={48} /></a>
+          <a href={APP_STORE} target="_blank" rel="noopener"><Image src={appStore} alt="Download on the App Store" height={48} /></a>
+        </div>
+      </div>
+      <Image class="app-shots" src={appScreens} alt="YECC app screens: Oracle job openings, a quiz with its explanation, and process video courses" widths={[560, 840, 1120]} sizes="(min-width: 960px) 560px, 100vw" />
+    </div>
+  </Section>
+
+  <Cta eyebrow="Ready to start?" title="Join the next cohort and build a career in Oracle Cloud ERP consulting.">
+    <Btn href="/upcoming-cohorts">View Upcoming Cohorts</Btn>
+    <Btn href={LOGIN} ghost>Sign in</Btn>
+  </Cta>
+</Layout>

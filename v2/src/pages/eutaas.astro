@@ -1,0 +1,176 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Checks from "../components/Checks.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import Icon from "../components/Icon.astro";
+import { FORM } from "../lib/site";
+
+// Implementation lifecycle, with the EUT window YECC takes on highlighted.
+const lifecycle = ["HLA", "CRP", "KUT", "UAT sign-off", "End User Training", "Go-live"];
+
+const approach = [
+  {
+    step: "Discover",
+    bullets: [
+      "Detailed study of SDDs, KUT manuals and other deliverables to learn the client’s business processes",
+      "Passive involvement of YECC’s EUT team during the HLA, CRP, KUT and UAT phases",
+      "Proprietary AI analysis of earlier deliverables and session recordings to capture client-specific details",
+      "Knowledge transfer sessions with the implementation team, only if needed",
+    ],
+  },
+  {
+    step: "Plan",
+    bullets: [
+      "Process lists",
+      "Training schedules, with users identified and role-wise topic lists finalised",
+      "A comprehensive training plan with dates and times",
+      "Sign-off on all of the above before preparation starts",
+    ],
+  },
+  {
+    step: "Prepare",
+    bullets: [
+      "End user training manuals",
+      "eLearning training videos, delivered after the sessions",
+      "Quizzes for each session or topic to confirm understanding",
+      "Course bundles mapped to the client’s Oracle role matrix",
+    ],
+  },
+  {
+    step: "Deliver",
+    bullets: [
+      "The trainer demonstrates each process",
+      "Every trainee performs the process and cross-checks it against the training material",
+      "An assessment or quiz closes each session",
+      "Quiz results and attendance are shared with the required stakeholders",
+    ],
+  },
+];
+---
+<Layout
+  path="/eutaas"
+  title="EUT-as-a-Service for Oracle SIs | YECC"
+  description="Outsource Oracle Cloud End User Training to YECC. Role-based sessions between UAT sign-off and go-live, with guides, videos and SHERPA access, while your team focuses on cutover."
+>
+  <Hero
+    eyebrow="EUT-as-a-Service for Oracle SIs"
+    title="Outsource End User Training.| Keep your team on go-live."
+    lead="YECC runs role-based End User Training for your Oracle Cloud clients, from planning to assessment, while your consultants focus on cutover."
+  >
+    <Btn href={FORM}>Discuss an EUTaaS engagement</Btn>
+    <Btn href="#approach" ghost>See our approach</Btn>
+  </Hero>
+
+  <Section id="why">
+    <Head
+      eyebrow="Why outsource EUT"
+      title="End users train in the busiest window| of the project."
+      lead="End users should learn the signed-off solution, as close to the live system as possible, and before it goes live. That puts EUT between UAT sign-off and go-live, exactly when your implementation team is busy with data migration and production configuration."
+    />
+    <ol class="lifecycle" aria-label="Oracle implementation lifecycle">
+      {lifecycle.map((phase) => (
+        <li class:list={{ on: phase === "End User Training" }}>
+          <span>{phase}</span>
+          {phase === "End User Training" && <small>YECC trains your client’s end users</small>}
+        </li>
+      ))}
+    </ol>
+    <div class="parallel">
+      <Icon name="users" />
+      <p><strong>Meanwhile, your team</strong> stays on data migration, production configuration and cutover.</p>
+    </div>
+  </Section>
+
+  <Section id="kut-vs-eut" class="bg-tint">
+    <Head
+      eyebrow="EUT is not KUT"
+      title="More granular, more roles,| many more users."
+      lead="Key User Training covers end-to-end flows for a small group. End User Training goes down to each role, for the client’s much larger user base."
+    />
+    <div class="grid c2">
+      <Card
+        icon="users" title="Key User Training (KUT)"
+        text="Usually in your SI’s scope, for a limited number of key users."
+        bullets={["One or more sessions for the entire P2P cycle", "End-to-end process flows", "A small group of key users"]}
+      />
+      <Card
+        icon="layers" title="End User Training (EUT)"
+        text="Specific sessions for each role, for everyone who will use the system."
+        bullets={["AP Invoice users", "AP Payment users", "AR Invoice users", "AR Receipts and Collections users, and so on", "The client’s full end-user base"]}
+      />
+    </div>
+  </Section>
+
+  <Section id="approach">
+    <Head
+      eyebrow="Our approach"
+      title="A systematic path| from discovery to delivery."
+      lead="Every EUTaaS engagement follows the same four stages, with sign-off from your team before training material is prepared."
+    />
+    <ol class="stages">
+      {approach.map((a, i) => (
+        <li>
+          <h3><span>{String(i + 1).padStart(2, "0")}</span>{a.step}</h3>
+          <Checks items={a.bullets} />
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section id="training-types" class="bg-tint">
+    <Head
+      eyebrow="What we deliver"
+      title="Three kinds of training,| across the project lifecycle."
+      lead="Each one is a full-stack training delivery project, run onsite or online as the engagement needs."
+    />
+    <div class="grid c3">
+      <Card
+        num="A" icon="target" title="Pre-Implementation Orientation" tags={["Before HLA and CRP"]}
+        text="Client key users learn the vanilla Oracle Cloud process flows beforehand, so HLAs and CRPs run more smoothly."
+      />
+      <Card
+        num="B" icon="cap" title="Standard End User Training" tags={["After UAT, before go-live"]}
+        text="Role-based sessions on the signed-off solution, so every end user is ready on day one."
+      />
+      <Card
+        num="C" icon="refresh" title="Refresher EUT" tags={["After go-live"]}
+        text="Refresher sessions for existing users and new joiners as processes settle and change."
+      />
+    </div>
+    <Chips items={["Onsite sessions", "Online sessions", "Custom pricing for every engagement"]} />
+  </Section>
+
+  <Section id="included">
+    <Head
+      eyebrow="Included with EUTaaS"
+      title="Guides, videos and SHERPA access| come with every engagement."
+      lead="Documentation-as-a-Service is usually part of an EUTaaS engagement, so the training material outlives the training sessions."
+    />
+    <div class="grid c3">
+      <Card
+        icon="file" title="Text, video and interactive guides"
+        text="Text guides, video guides and interactive video guides for every process in scope."
+        bullets={["Delivered through SHERPA (recommended), so updates stay easy", "Text and video guides also available as offline downloads"]}
+      />
+      <Card
+        icon="book" title="Built per process, bundled by role"
+        text="Each guide and video covers one process. We then bundle them by role, so every user persona gets exactly the processes they need."
+      />
+      <Card
+        icon="monitor" title="SHERPA access for users and your team"
+        text="End users get complimentary SHERPA access, usually for 3 months after EUT ends."
+        bullets={["Extendable on a chargeable basis, and can be bundled with your support contract", "Reviewer access for your consultants to review, comment, track resolutions and sign off every guide"]}
+      />
+    </div>
+  </Section>
+
+  <Cta eyebrow="Custom-built for every project" title="Tell us about your client and timeline, and we will scope the EUT.">
+    <Btn href={FORM}>Discuss an EUTaaS engagement</Btn>
+  </Cta>
+</Layout>

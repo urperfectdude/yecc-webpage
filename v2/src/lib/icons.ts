@@ -15,6 +15,7 @@ export const ICONS: Record<string, string> = {
   "search": "<path d=\"M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4\"/>",
   "sliders": "<path d=\"M4 7h10M18 7h2M4 17h2M10 17h10M16 5v4M8 15v4\"/>",
   "file": "<path d=\"M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6\"/>",
+  "app": "<path d=\"M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 18h2\"/>",
   "monitor": "<path d=\"M3 5h18v11H3zM8 20h8M12 16v4\"/>",
   "cap": "<path d=\"M2 9l10-5 10 5-10 5-10-5zM6 11.500V16c2 2 10 2 12 0v-4.5\"/>",
   "target": "<path d=\"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z\"/>",

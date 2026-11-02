@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Checks from "../components/Checks.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import { FORM } from "../lib/site";
+
+const approach = [
+  {
+    step: "Capture",
+    bullets: [
+      "Process lists agreed with your team",
+      "Study of SDDs, configuration and test environments",
+      "Existing Word or PDF guides uploaded to SHERPA as a starting point",
+    ],
+  },
+  {
+    step: "Author",
+    bullets: [
+      "One text guide and one video per process",
+      "Interactive video guides where hands-on practice helps",
+      "The client’s own data, screens and terminology",
+    ],
+  },
+  {
+    step: "Review",
+    bullets: [
+      "Reviewer access for your consultants in SHERPA",
+      "Comments raised and resolved on the guide itself",
+      "Formal sign-off on every guide before release",
+    ],
+  },
+  {
+    step: "Publish & maintain",
+    bullets: [
+      "Guides bundled by role and published through SHERPA",
+      "Only the changed steps are updated, then republished automatically",
+      "Refreshed for quarterly Oracle Cloud releases",
+    ],
+  },
+];
+---
+<Layout
+  path="/daas"
+  title="Documentation-as-a-Service for Oracle SIs | YECC"
+  description="Text guides, video guides and interactive video guides for your Oracle Cloud clients, authored by YECC, signed off by your team, and kept current through SHERPA."
+>
+  <Hero
+    eyebrow="Documentation-as-a-Service for Oracle SIs"
+    title="Client-specific guides and videos,| written for you, kept current."
+    lead="YECC authors process guides and videos for your Oracle Cloud clients, your consultants sign them off, and SHERPA keeps them up to date."
+  >
+    <Btn href={FORM}>Discuss a DaaS engagement</Btn>
+    <Btn href="#approach" ghost>See how it works</Btn>
+  </Hero>
+
+  <Section id="formats">
+    <Head
+      eyebrow="What we create"
+      title="Three formats| for every process in scope."
+      lead="Each guide covers one process, so the same material can be bundled in different ways for each role."
+    />
+    <div class="grid c3">
+      <Card icon="file" num="01" title="Text guides" text="Step-by-step user guides with annotated screenshots of the client’s configured Oracle Cloud screens." />
+      <Card icon="video" num="02" title="Video guides" text="Narrated process walkthroughs that users can revisit at the moment they need them." />
+      <Card icon="monitor" num="03" title="Interactive video guides" text="Guided, click-along videos that let users practise a process before doing it for real." />
+    </div>
+    <Chips items={["Delivered through SHERPA (recommended)", "Offline downloads for text and video guides", "Bundled by role"]} />
+  </Section>
+
+  <Section id="when" class="bg-tint">
+    <Head
+      eyebrow="When SIs use DaaS"
+      title="During implementation,| and long after go-live."
+    />
+    <div class="grid c2">
+      <Card
+        icon="layers" title="During implementation"
+        text="Documentation runs alongside your delivery, so guides are ready for key users, end users and go-live."
+        bullets={[
+          "**Vanilla process guides and videos** give client users an early start",
+          "**Configured processes are captured** as soon as configurations are approved",
+          "**Usually bundled with EUTaaS**, so training and documentation share one source",
+        ]}
+      />
+      <Card
+        icon="refresh" title="During support and AMS"
+        text="Guides stay accurate as processes, workflows and screens change after go-live."
+        bullets={[
+          "**Existing static Word docs or PDFs** are converted into maintainable guides and videos",
+          "**Only what changed is updated**, and the guide republishes automatically",
+          "**Quarterly Oracle Cloud releases** are reflected in the affected guides",
+        ]}
+      />
+    </div>
+  </Section>
+
+  <Section id="approach">
+    <Head
+      eyebrow="How it works"
+      title="Your consultants sign off.| We do the writing."
+      lead="Your team keeps control of the content without spending billable hours writing it."
+    />
+    <ol class="stages">
+      {approach.map((a, i) => (
+        <li>
+          <h3><span>{String(i + 1).padStart(2, "0")}</span>{a.step}</h3>
+          <Checks items={a.bullets} />
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section id="why-sherpa" class="bg-navy">
+    <Head
+      eyebrow="Why deliver through SHERPA"
+      title="One place to find, review| and update every guide."
+      lead="Offline files go out of date the day they are shared. In SHERPA, users always see the current version, and your team can see exactly what changed and who signed it off."
+    >
+      <Chips items={["Always the current version", "Role-based access", "Review and sign-off trail", "Easy updates"]} />
+    </Head>
+    <div class="btns"><Btn href="/sherpa" ghost>Explore SHERPA</Btn></div>
+  </Section>
+
+  <Cta eyebrow="Scoped to your client" title="Tell us the processes and roles in scope, and we will scope the documentation.">
+    <Btn href={FORM}>Discuss a DaaS engagement</Btn>
+  </Cta>
+</Layout>

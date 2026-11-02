@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Btn from "../components/Btn.astro";
+import Head from "../components/Head.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import Checks from "../components/Checks.astro";
+import Chips from "../components/Chips.astro";
+import Cta from "../components/Cta.astro";
+import LogoBand from "../components/LogoBand.astro";
+import { FORM } from "../lib/site";
+
+const steps = [
+  {
+    step: "Share the need",
+    bullets: ["Oracle module and role", "Experience level and project phase", "Start date, duration and location"],
+  },
+  {
+    step: "Shortlist",
+    bullets: ["Profiles from YECC’s trained talent pool", "Screened by YECC’s Oracle functional experts", "Only candidates who fit the role are shared"],
+  },
+  {
+    step: "Interview",
+    bullets: ["Your team interviews the shortlist", "Practical, process-led candidates", "Quick turnaround on feedback"],
+  },
+  {
+    step: "Onboard",
+    bullets: ["Resources join your project team", "YECC stays in touch through the engagement", "Upskilling support through YECC courses"],
+  },
+];
+
+const figures = [
+  { value: "150+", label: "learners trained" },
+  { value: "50+", label: "placed in Oracle Consulting roles" },
+  { value: "3", label: "Oracle Cloud tracks: Financials, SCM and HCM" },
+];
+---
+<Layout
+  path="/resource-augmentation"
+  title="Oracle Resource Augmentation for SIs | YECC"
+  description="Project-ready Oracle Cloud ERP consultants for System Integrators, trained by YECC across Financials, Supply Chain and HCM, to fill delivery gaps quickly."
+>
+  <Hero
+    eyebrow="Oracle Resource Augmentation for SIs"
+    title="Project-ready Oracle talent,| when your projects need it."
+    lead="YECC trains Oracle Cloud ERP consultants the way consulting companies do, and places them in your delivery teams."
+  >
+    <Btn href={FORM}>Share a resource requirement</Btn>
+    <Btn href="#how-it-works" ghost>See how it works</Btn>
+  </Hero>
+
+  <LogoBand label="YECC learners now work at" />
+
+  <section class="figures" aria-label="YECC talent outcomes">
+    <div class="wrap">
+      <dl>
+        {figures.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <Section id="why">
+    <Head
+      eyebrow="Why SIs augment with YECC"
+      title="Fill delivery gaps| without slowing the project."
+      lead="Implementation and support projects need extra hands at short notice. YECC gives you consultants who already know the processes, the Oracle Cloud screens and how consulting projects run."
+    />
+    <div class="grid c3">
+      <Card icon="target" title="Ready from day one" text="Trained on business processes, Oracle demo systems and consulting skills, so ramp-up time is short." />
+      <Card icon="clock" title="Quick to deploy" text="A trained talent pool across Finance, Supply Chain and HCM means shortlists arrive fast." />
+      <Card icon="shield" title="Screened by experts" text="Every profile is checked by YECC’s Oracle functional experts before it reaches you." />
+    </div>
+  </Section>
+
+  <Section id="roles" class="bg-tint">
+    <Head
+      eyebrow="Who we provide"
+      title="The right level| for each role."
+    />
+    <div class="grid c3">
+      <Card
+        icon="cap" num="01" title="Junior functional consultants"
+        text="Graduates and domain experts trained through YECC’s fresher cohorts and corporate batches."
+        bullets={["Oracle Cloud Financials", "Oracle Cloud Supply Chain", "Oracle Cloud HCM"]}
+      />
+      <Card
+        icon="users" num="02" title="Experienced Oracle consultants"
+        text="Consultants from YECC’s network who are upskilling and cross-skilling with us."
+        bullets={["Module specialists for project phases", "Support and AMS roles", "Cross-skilled consultants for new modules"]}
+      />
+      <Card
+        icon="layers" num="03" title="Delivery support roles"
+        text="Extra capacity for the busiest phases of a project."
+        bullets={["Testing and UAT support", "Documentation and training", "Data validation for migration"]}
+      />
+    </div>
+  </Section>
+
+  <Section id="how-it-works">
+    <Head
+      eyebrow="How it works"
+      title="From requirement to onboarding| in four steps."
+    />
+    <ol class="stages">
+      {steps.map((s, i) => (
+        <li>
+          <h3><span>{String(i + 1).padStart(2, "0")}</span>{s.step}</h3>
+          <Checks items={s.bullets} />
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section id="engagement" class="bg-navy">
+    <Head
+      eyebrow="Engagement models"
+      title="Flexible terms| for every project."
+      lead="Pricing and terms are agreed for each requirement, based on the role, the duration and the project."
+    >
+      <Chips items={["Project-based deployment", "Contract-to-hire", "Direct hiring of trained freshers", "Custom pricing"]} />
+    </Head>
+  </Section>
+
+  <Cta eyebrow="Need Oracle consultants?" title="Tell us the module, the role and the start date, and we will share profiles.">
+    <Btn href={FORM}>Share a resource requirement</Btn>
+  </Cta>
+</Layout>
