@@ -195,7 +195,7 @@
   .hero-home .lead { margin-inline: auto; max-width: 44ch; }
   .hero-home .btns { justify-content: center; }
   /* On phones the hero buttons stack; one shared column makes them all as wide as the widest */
-  @media (max-width: 600px) { .hero-home .btns { display: grid; grid-template-columns: minmax(0, max-content); } }
+  @media (max-width: 600px) { .hero-home .btns, .hero-plain .btns { display: grid; grid-template-columns: minmax(0, max-content); } }
   /* Consultant side: same layout as the home hero, flipped to brand blue so the two audiences read apart */
   .hero-alt {
     color: rgba(255, 255, 255, 0.85);
@@ -244,6 +244,37 @@
     .figures dl { grid-template-columns: minmax(0, 1fr); gap: 28px; }
     .figures dl > div + div { border-left: 0; border-top: 1px solid var(--color-line); padding-top: 28px; }
     .figures dd { font-size: 2.3rem; }
+  }
+
+  /* EUTaaS: implementation lifecycle with the EUT window picked out */
+  .lifecycle { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .lifecycle li { display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; min-width: 0; padding: 14px 18px; border-radius: 12px; background: var(--color-tint-2); font-weight: 600; color: var(--color-ink); }
+  .lifecycle li.on { background: var(--color-blue); color: var(--color-white); }
+  .lifecycle small { font-size: 0.82rem; font-weight: 500; line-height: 1.35; color: rgba(255, 255, 255, 0.85); }
+  @media (min-width: 900px) {
+    .lifecycle { grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 2fr) minmax(0, 1fr); }
+    .lifecycle li { align-items: center; text-align: center; min-height: 92px; padding: 14px 10px; }
+  }
+  .parallel { display: flex; align-items: flex-start; gap: 0.8rem; margin-top: 1.25rem; padding: 16px 20px; border: 1px dashed var(--color-line); border-radius: 12px; }
+  .parallel svg { width: 22px; height: 22px; flex: none; margin-top: 2px; color: var(--color-red); }
+  .parallel p { margin: 0; }
+  .parallel strong { color: var(--color-ink); }
+
+  /* EUTaaS: four approach stages, chevron headers in deepening blues */
+  .stages { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .stages > li { min-width: 0; }
+  .stages h3 { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem; padding: 14px 20px; border-radius: 12px; background: var(--color-blue-dark); color: var(--color-white); font-size: 1.1rem; }
+  .stages li:nth-child(2) h3 { background: var(--color-blue); }
+  .stages li:nth-child(3) h3 { background: #4a8ae3; }
+  .stages li:nth-child(4) h3 { background: #6aa0ea; }
+  .stages h3 span { font-family: var(--font-serif); font-weight: 500; opacity: 0.75; }
+  .stages .checks li { font-size: 0.95rem; }
+  @media (min-width: 700px) { .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; } }
+  @media (min-width: 1100px) {
+    .stages { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 6px; }
+    .stages h3 { border-radius: 0; padding-left: 34px; clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%); }
+    .stages li:first-child h3 { padding-left: 20px; clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%); border-radius: 12px 0 0 12px; }
+    .stages .checks { padding-right: 14px; }
   }
 
   /* Logo band */

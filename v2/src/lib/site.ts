@@ -30,9 +30,9 @@ export const ECAMPUS = "https://ecampus.yourerpcoach.com";
 
 // The site has two audiences, each with its own menu. The header shows a plain link across to the other one.
 export const NAV: NavItem[] = [
-  { label: "EUTaaS", href: "/partnerships#implementation-enablement" },
-  { label: "DaaS", href: "/partnerships#ams-enablement" },
-  { label: "Resource Augmentation", href: "/partnerships#daas" },
+  { label: "EUTaaS", href: "/eutaas" },
+  { label: "DaaS", href: "/daas" },
+  { label: "Resource Augmentation", href: "/resource-augmentation" },
   { label: "Consulting Training", href: "/talent-pathways#corporate-fresher-training" },
   { label: "SHERPA", href: "/sherpa" },
 ];
